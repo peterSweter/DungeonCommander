@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.sweter.game.screens.GameScreen;
 
 public class dungeonCommander extends Game {
@@ -13,8 +14,9 @@ public class dungeonCommander extends Game {
 	public static final  float GAME_WIDTH = 890;
 	public static final float  GAME_HEIGHT = 540;
 
-	SpriteBatch batch;
-	Texture img;
+	public SpriteBatch batch;
+	public Texture img;
+	public ShapeRenderer shapeRenderer;
 	
 	@Override
 	public void create () {
