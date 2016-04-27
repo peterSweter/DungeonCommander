@@ -20,6 +20,8 @@ public class dungeonCommander extends Game {
 	
 	@Override
 	public void create () {
+		batch = new SpriteBatch();
+		shapeRenderer = new ShapeRenderer();
 		setScreen(new GameScreen(this));
 	}
 
