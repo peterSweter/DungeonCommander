@@ -5,6 +5,8 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,10 +21,7 @@ public class GameScreen implements Screen {
 
     public OrthographicCamera camera;
     Viewport viewport;
-
-
-
-
+    public Texture img;
 
 
     public GameScreen(dungeonCommander game){
@@ -34,7 +33,7 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false, game.GAME_WIDTH,game.GAME_HEIGHT);
 
 
-
+        img = new Texture("badlogic.jpg");
 
     }
 
@@ -42,9 +41,9 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(new InputAdapter() {
 
             @Override
-            public boolean touchDown (int x, int y, int pointer, int button) {
+            public boolean touchDown(int x, int y, int pointer, int button) {
 
-                Vector3 touch_point = new Vector3(x,y,0);
+                Vector3 touch_point = new Vector3(x, y, 0);
                 camera.unproject(touch_point);
 
 
@@ -52,7 +51,7 @@ public class GameScreen implements Screen {
             }
 
             @Override
-            public boolean touchUp (int x, int y, int pointer, int button) {
+            public boolean touchUp(int x, int y, int pointer, int button) {
 
 
                 return true;
@@ -78,7 +77,7 @@ public class GameScreen implements Screen {
 
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-  
+            game.batch.draw(img, 0, 0);
         game.batch.end();
 
     }
