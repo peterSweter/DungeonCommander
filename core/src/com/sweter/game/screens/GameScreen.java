@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sweter.game.dungeonCommander;
+import com.sweter.game.entities.Unit;
 
 /**
  * Created by peter on 4/27/16.
@@ -22,6 +24,7 @@ public class GameScreen implements Screen {
     public OrthographicCamera camera;
     Viewport viewport;
     public Texture img;
+    private Unit testUnit;
 
 
     public GameScreen(dungeonCommander game){
@@ -35,6 +38,8 @@ public class GameScreen implements Screen {
 
         img = new Texture("badlogic.jpg");
 
+        testUnit = new Unit(50,50);
+
     }
 
     public void update(float delta){
@@ -46,6 +51,7 @@ public class GameScreen implements Screen {
                 Vector3 touch_point = new Vector3(x, y, 0);
                 camera.unproject(touch_point);
 
+                testUnit.setTarget(touch_point);
 
                 return true;
             }
@@ -58,7 +64,7 @@ public class GameScreen implements Screen {
             }
         });
 
-
+        testUnit.update(delta);
 
     }
 
@@ -76,9 +82,15 @@ public class GameScreen implements Screen {
         camera.update();
 
         game.batch.setProjectionMatrix(camera.combined);
+
         game.batch.begin();
-            game.batch.draw(img, 0, 0);
+            testUnit.render(game.batch);
         game.batch.end();
+
+        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            testUnit.sRender(game.shapeRenderer);
+        game.shapeRenderer.end();
+
 
     }
 
