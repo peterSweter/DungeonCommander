@@ -29,7 +29,7 @@ public class MenuScreen implements Screen {
 
             @Override
             public boolean touchDown(int x, int y, int pointer, int button) {
-                System.out.println(x + " " + y);
+                //System.out.println(x + " " + y);
                 if(x > 250 && x < 640 && y > 170 && y < 260){
                     callGame = true;
                 }
