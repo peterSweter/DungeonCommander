@@ -6,8 +6,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sweter.game.screens.GameScreen;
 
 public class dungeonCommander extends Game {
+
+	public static final  float GAME_WIDTH = 890;
+	public static final float  GAME_HEIGHT = 540;
+
 	SpriteBatch batch;
 	Texture img;
 	
@@ -24,6 +29,7 @@ public class dungeonCommander extends Game {
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.end();
+		setScreen(new GameScreen());
 	}
 
 	@Override
