@@ -62,8 +62,6 @@ public class MenuScreen implements Screen {
         //mysprite.setOriginCenter();
         //mysprite.draw();
         game.batch.end();
-
-
     }
 
     @Override
