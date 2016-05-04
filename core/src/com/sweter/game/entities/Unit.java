@@ -16,13 +16,20 @@ public class Unit implements Character {
 
     float x,y;
     float width = 20;
-    Vector3 target;
+    public Vector3 target;
     boolean isTargeted = false;
+    boolean isEnemy = false;
     float speed = 50;
-    public Unit(int x,int y){
+    public Unit(int x,int y){   /// default constructor, primarly for constructing player bound units
         this.x = x;
         this.y = y;
 
+    }
+
+    public Unit(int x, int y, boolean isEnemy){ /// constructor for constructing enemy units
+        this.x = x;
+        this.y = y;
+        this.isEnemy = isEnemy;
     }
 
     public void setTarget(Vector3 target){
@@ -42,14 +49,20 @@ public class Unit implements Character {
 
     @Override
     public void sRender(ShapeRenderer sr) {
-
+        if(isEnemy)
+            sr.setColor(Color.FIREBRICK);
+        else
             sr.setColor(Color.BLACK);
-            sr.circle(x,y, width);
-
+        sr.circle(x,y, width);
     }
     @Override
     public void render(SpriteBatch sb){
 
+    }
+
+    @Override
+    public Vector3 getPosition() {
+        return new Vector3(x, y, 0);
     }
 
     @Override

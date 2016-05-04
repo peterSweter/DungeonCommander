@@ -25,6 +25,7 @@ public class GameScreen implements Screen {
     Viewport viewport;
     public Texture img;
     private Unit testUnit;
+    private Unit testEnemy;
 
 
     public GameScreen(dungeonCommander game){
@@ -39,6 +40,7 @@ public class GameScreen implements Screen {
         img = new Texture("badlogic.jpg");
 
         testUnit = new Unit(50,50);
+        testEnemy = new Unit((int) game.GAME_WIDTH-50, (int) game.GAME_HEIGHT-50, true);
 
     }
 
@@ -52,7 +54,7 @@ public class GameScreen implements Screen {
                 camera.unproject(touch_point);
 
                 testUnit.setTarget(touch_point);
-
+                testEnemy.setTarget(testUnit.getPosition());
                 return true;
             }
 
@@ -65,7 +67,8 @@ public class GameScreen implements Screen {
         });
 
         testUnit.update(delta);
-
+        testEnemy.setTarget(testUnit.getPosition());
+        testEnemy.update(delta);
     }
 
     @Override
@@ -85,10 +88,12 @@ public class GameScreen implements Screen {
 
         game.batch.begin();
             testUnit.render(game.batch);
+            testEnemy.render(game.batch);
         game.batch.end();
 
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             testUnit.sRender(game.shapeRenderer);
+            testEnemy.sRender(game.shapeRenderer);
         game.shapeRenderer.end();
 
 
