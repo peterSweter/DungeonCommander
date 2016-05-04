@@ -27,7 +27,6 @@ public class GameScreen implements Screen {
     private Unit testUnit;
     private Unit testEnemy;
 
-
     public GameScreen(dungeonCommander game){
 
         this.game = game;
