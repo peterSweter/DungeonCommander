@@ -1,13 +1,13 @@
 package com.sweter.game.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.sweter.game.interfaces.Character;
 
-import java.awt.Rectangle;
+import com.badlogic.gdx.math.Rectangle;
+
 
 /**
  * Created by peter on 4/27/16.
@@ -15,13 +15,16 @@ import java.awt.Rectangle;
 public class Unit implements Character {
 
     float x,y;
+    Vector3 gV;
     float width = 20;
     Vector3 target;
     boolean isTargeted = false;
     float speed = 50;
+
     public Unit(int x,int y){
         this.x = x;
         this.y = y;
+        gV =  new Vector3(x,y,0);
 
     }
 
@@ -30,7 +33,15 @@ public class Unit implements Character {
         isTargeted = true;
     }
     @Override
-    public void update(float delta) {
+    public void update(float delta, boolean blocked) {
+        if(blocked) {
+            isTargeted = false;
+            x = gV.x;
+            y = gV.y;
+            return;
+        }
+        gV.set(x,y,0);
+
         if(isTargeted){
             this.x += Math.signum(target.x - this.x) * delta * speed;
             this.y += Math.signum(target.y - this.y) * delta * speed;
@@ -54,6 +65,7 @@ public class Unit implements Character {
 
     @Override
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle(x,y,width, width);
+
     }
 }

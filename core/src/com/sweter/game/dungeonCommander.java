@@ -12,7 +12,7 @@ import com.sweter.game.screens.MenuScreen;
 
 public class dungeonCommander extends Game {
 
-	public static final  float GAME_WIDTH = 890;
+	public static final  float GAME_WIDTH = 870;
 	public static final float  GAME_HEIGHT = 540;
 
 	public SpriteBatch batch;

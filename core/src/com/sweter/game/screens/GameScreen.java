@@ -8,11 +8,22 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sweter.game.dungeonCommander;
+import com.sweter.game.entities.TestRoom;
 import com.sweter.game.entities.Unit;
+
+import java.awt.Rectangle;
 
 /**
  * Created by peter on 4/27/16.
@@ -25,7 +36,7 @@ public class GameScreen implements Screen {
     Viewport viewport;
     public Texture img;
     private Unit testUnit;
-
+    private TestRoom room;
 
     public GameScreen(dungeonCommander game){
 
@@ -36,9 +47,13 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false, game.GAME_WIDTH,game.GAME_HEIGHT);
 
 
+
+
         img = new Texture("badlogic.jpg");
 
         testUnit = new Unit(50,50);
+        room = new TestRoom();
+
 
     }
 
@@ -63,8 +78,16 @@ public class GameScreen implements Screen {
                 return true;
             }
         });
+        boolean blocked = false;
+        for (RectangleMapObject rectangleObject : room.getObjects().getByType(RectangleMapObject.class)) {
 
-        testUnit.update(delta);
+            com.badlogic.gdx.math.Rectangle rectangle = rectangleObject.getRectangle();
+            if (Intersector.overlaps(rectangle, testUnit.getBounds())){
+               blocked = true;
+            }
+        }
+
+        testUnit.update(delta, blocked);
 
     }
 
@@ -81,6 +104,8 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
 
+        room.renderTiled(camera);
+
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
@@ -90,6 +115,8 @@ public class GameScreen implements Screen {
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             testUnit.sRender(game.shapeRenderer);
         game.shapeRenderer.end();
+
+
 
 
     }

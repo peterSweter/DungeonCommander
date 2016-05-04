@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="29" height="18" tilewidth="30" tileheight="30">
+ <tileset firstgid="1" name="tiledungeon" tilewidth="30" tileheight="30" spacing="10" margin="10">
+  <image source="tiledungeon.jpg" width="342" height="342"/>
+ </tileset>
+ <tileset firstgid="65" name="DRDungeon" tilewidth="30" tileheight="30">
+  <image source="DRDungeon.png" width="768" height="432"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="29" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxrY2RgaKMhxgZA4nY0wgNlpx2Jdt5gGLVzMNtJahoabnaCzMaF6e1PSvGonaN2Djc76V1nAwA6h4mO
+  </data>
+ </layer>
+ <objectgroup name="Objectl1" width="29" height="18">
+  <object x="1" y="1" width="718" height="27"/>
+  <object x="691" y="3" width="29" height="535"/>
+  <object x="2" y="3" width="27" height="537"/>
+  <object x="2" y="509" width="720" height="31"/>
+  <object x="22" y="269" width="215" height="29"/>
+  <object x="209" y="92" width="29" height="207"/>
+ </objectgroup>
+</map>

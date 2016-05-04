@@ -9,9 +9,9 @@ import java.awt.Rectangle;
  * Created by peter on 4/27/16.
  */
 public interface Character {
-    public void update(float delta);
+    public void update(float delta, boolean blocked);
     public void sRender(ShapeRenderer sr);
     public void render(SpriteBatch sb);
-    public Rectangle getBounds();
+    public com.badlogic.gdx.math.Rectangle getBounds();
     //public
 }
