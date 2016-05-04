@@ -36,11 +36,7 @@ public class GameScreen implements Screen {
     Viewport viewport;
     public Texture img;
     private Unit testUnit;
-<<<<<<< HEAD
     private TestRoom room;
-=======
-    private Unit testEnemy;
->>>>>>> 1301681214d1b36cf391ff54528c627e5c003c24
 
     public GameScreen(dungeonCommander game){
 
@@ -56,12 +52,8 @@ public class GameScreen implements Screen {
         img = new Texture("badlogic.jpg");
 
         testUnit = new Unit(50,50);
-<<<<<<< HEAD
         room = new TestRoom();
 
-=======
-        testEnemy = new Unit((int) game.GAME_WIDTH-50, (int) game.GAME_HEIGHT-50, true);
->>>>>>> 1301681214d1b36cf391ff54528c627e5c003c24
 
     }
 
@@ -75,7 +67,7 @@ public class GameScreen implements Screen {
                 camera.unproject(touch_point);
 
                 testUnit.setTarget(touch_point);
-                testEnemy.setTarget(testUnit.getPosition());
+
                 return true;
             }
 
@@ -89,7 +81,6 @@ public class GameScreen implements Screen {
         boolean blocked = false;
         for (RectangleMapObject rectangleObject : room.getObjects().getByType(RectangleMapObject.class)) {
 
-<<<<<<< HEAD
             com.badlogic.gdx.math.Rectangle rectangle = rectangleObject.getRectangle();
             if (Intersector.overlaps(rectangle, testUnit.getBounds())){
                blocked = true;
@@ -98,11 +89,6 @@ public class GameScreen implements Screen {
 
         testUnit.update(delta, blocked);
 
-=======
-        testUnit.update(delta);
-        testEnemy.setTarget(testUnit.getPosition());
-        testEnemy.update(delta);
->>>>>>> 1301681214d1b36cf391ff54528c627e5c003c24
     }
 
     @Override
@@ -124,12 +110,10 @@ public class GameScreen implements Screen {
 
         game.batch.begin();
             testUnit.render(game.batch);
-            testEnemy.render(game.batch);
         game.batch.end();
 
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             testUnit.sRender(game.shapeRenderer);
-            testEnemy.sRender(game.shapeRenderer);
         game.shapeRenderer.end();
 
 
