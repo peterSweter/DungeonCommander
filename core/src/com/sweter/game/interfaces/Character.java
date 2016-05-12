@@ -16,4 +16,5 @@ public interface Character {
     public Vector3 getPosition();
     public Rectangle getBounds();
     //public
+//public void collisionray();
 }
