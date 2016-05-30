@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.sweter.game.screens.GameScreen;
 import com.sweter.game.screens.MenuScreen;
-
+//test
 public class dungeonCommander extends Game {
 
 	public static final  float GAME_WIDTH = 870;
