@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -37,6 +38,8 @@ public class GameScreen implements Screen {
     private InputManager inputManager;
     private CollisionManager collisionManager;
 
+    /// myinfo for getting pathfinder done
+    private int column, row;
 
     public GameScreen(dungeonCommander game){
 
@@ -53,7 +56,10 @@ public class GameScreen implements Screen {
         collisionManager = new CollisionManager(unitManager, level_01);
 
 
-
+        column = (int)unitManager.mainCharacter.getPosition().x/16;
+        column = (int)unitManager.mainCharacter.getPosition().y/16;
+        System.out.println("maincharater starting postition: " +
+                unitManager.mainCharacter.getPosition().x + " " + unitManager.mainCharacter.getPosition());
 
 
     }
@@ -100,8 +106,7 @@ public class GameScreen implements Screen {
 
         game.shapeRenderer.end();
 
-
-
+      //  System.out.println("debug tileLayer, height: " + (int)unitManager.mainCharacter.getPosition().x/32 + " " + (int)unitManager.mainCharacter.getPosition().y/32);
 
     }
 
