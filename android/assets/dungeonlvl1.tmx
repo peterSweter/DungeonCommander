@@ -27,5 +27,7 @@
   <object x="675" y="37" width="31" height="439"/>
   <object name="wall" type="1" x="419" y="163" width="187" height="28"/>
   <object name="wall" type="1" x="993" y="35" width="31" height="413"/>
+  <object name="wall" type="1" x="708" y="451" width="315" height="28"/>
+  <object x="441" y="-13"/>
  </objectgroup>
 </map>

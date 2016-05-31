@@ -80,6 +80,8 @@ public class Unit implements Character {
         else
             sr.setColor(Color.FIREBRICK);
         sr.circle(x,y, width);
+
+        //drawBounds(sr);
     }
     @Override
     public void render(SpriteBatch sb){
@@ -93,7 +95,15 @@ public class Unit implements Character {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,width, width);
+        //drawing bounds for testing purposes
+        return new Rectangle(x-width,y-width,width*2, width*2);
+
+    }
+
+    public void drawBounds(ShapeRenderer sr){
+        sr.setColor(Color.WHITE);
+        Rectangle r = getBounds();
+        sr.rect(r.getX(),r.getY(),r.getWidth(),r.getHeight());
     }
 
     @Override
