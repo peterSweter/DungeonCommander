@@ -3,27 +3,23 @@ package com.sweter.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sweter.game.dungeonCommander;
-import com.sweter.game.entities.TestRoom;
+import com.sweter.game.entities.Level;
 import com.sweter.game.entities.Unit;
-
-import java.awt.Rectangle;
+import com.sweter.game.managers.CollisionManager;
+import com.sweter.game.managers.InputManager;
+import com.sweter.game.managers.UnitManager;
 
 /**
  * Created by peter on 4/27/16.
@@ -35,9 +31,12 @@ public class GameScreen implements Screen {
     public OrthographicCamera camera;
     Viewport viewport;
     public Texture img;
-    private Unit testUnit;
-    private Unit testEnemy;
-    private TestRoom room;
+
+    private Level level_01;
+    private UnitManager unitManager;
+    private InputManager inputManager;
+    private CollisionManager collisionManager;
+
 
     public GameScreen(dungeonCommander game){
 
@@ -48,53 +47,23 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false, game.GAME_WIDTH,game.GAME_HEIGHT);
 
 
+        level_01 = new Level("dungeonlvl1.tmx");
+        unitManager = new UnitManager();
+        inputManager = new InputManager(unitManager, camera);
+        collisionManager = new CollisionManager(unitManager, level_01);
 
 
-        img = new Texture("badlogic.jpg");
 
-        testUnit = new Unit(50,50);
-        testEnemy = new Unit((int) game.GAME_WIDTH-240, (int) game.GAME_HEIGHT-240, true);
-        room = new TestRoom();
 
 
     }
 
     public void update(float delta){
-        Gdx.input.setInputProcessor(new InputAdapter() {
 
-            @Override
-            public boolean touchDown(int x, int y, int pointer, int button) {
+        inputManager.update();
+        unitManager.update(delta);
+        collisionManager.update();
 
-                Vector3 touch_point = new Vector3(x, y, 0);
-                camera.unproject(touch_point);
-
-                testUnit.setTarget(touch_point);
-                testEnemy.setTarget(testUnit.getPosition());
-
-                return true;
-            }
-
-            @Override
-            public boolean touchUp(int x, int y, int pointer, int button) {
-
-
-                return true;
-            }
-        });
-
-        boolean blocked = false;
-
-        for (RectangleMapObject rectangleObject : room.getObjects().getByType(RectangleMapObject.class)) {
-
-            com.badlogic.gdx.math.Rectangle rectangle = rectangleObject.getRectangle();
-            if (Intersector.overlaps(rectangle, testUnit.getBounds())){
-               blocked = true;
-            }
-        }
-
-        testUnit.update(delta, blocked);
-        testEnemy.setTarget(testUnit.getPosition());
-        testEnemy.update(delta, blocked);
 
     }
 
@@ -109,26 +78,34 @@ public class GameScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.position.set(unitManager.getActiveCharacter().getPosition().x, unitManager.getActiveCharacter().getPosition().y, 0);
         camera.update();
-
-        room.renderTiled(camera);
-
         game.batch.setProjectionMatrix(camera.combined);
+        game.shapeRenderer.setProjectionMatrix(camera.combined);
+
+
+
+        level_01.renderTiled(camera);
 
         game.batch.begin();
-        testUnit.render(game.batch);
-        testEnemy.render(game.batch);
+            unitManager.render(game.batch);
+
         game.batch.end();
 
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            testUnit.sRender(game.shapeRenderer);
-         testEnemy.sRender(game.shapeRenderer);
+            unitManager.schapeRender(game.shapeRenderer);
+            //drawing wall bounds from level 01
+            level_01.drawBound(game.shapeRenderer);
+
+
         game.shapeRenderer.end();
 
 
 
 
     }
+
+
 
     @Override
     public void resize(int width, int height) {

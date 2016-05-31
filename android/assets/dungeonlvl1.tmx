@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="90" height="18">
   <data encoding="base64" compression="zlib">
-   eJzt1zEOgDAIQFFG49SlJ/H+d3PR0RQaoKjf5E9tJL4OahORFpDm6kGzK7cp0+y1OGvnZmcxGe3H+Z/O+9XTfUfrOOM84+z5HswwW+l8TDprZ37B2fLtgDPOlZ1nnhlnnFf74PyucMa58n+Kl/O9FuHcDeFMnmeAc64zxXYCQVM6Ng==
+   eJzt1zEKgDAMQNGCizh16Um8/926VJxKk9DUqF/4U4vBVxDNKaXskOQqTrMjtwuT7NU4S+euTmMy2o/zP52PVu++o3WccbY499pavDfuTqOzdOYXnDXfDjjjHNnZ8sw44/y0D87vCmecI/+nzHK+1jyciyKcaeYZ4LzWmXyrbdE6HA==
   </data>
  </layer>
  <objectgroup name="walls" width="90" height="18">
@@ -26,7 +26,6 @@
   <object name="wall" type="1" x="385" y="37" width="28" height="156"/>
   <object x="675" y="37" width="31" height="439"/>
   <object name="wall" type="1" x="419" y="163" width="187" height="28"/>
-  <object name="wall" type="1" x="709" y="452" width="315" height="29"/>
   <object name="wall" type="1" x="993" y="35" width="31" height="413"/>
  </objectgroup>
 </map>

@@ -17,39 +17,45 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Unit implements Character {
     float x,y;
-    Vector3 gV;
+
+    Vector3 last_position;
     float width = 20;
     public Vector3 target;
     boolean isTargeted = false;
     boolean isEnemy = false;
+    int type;
+
     float speed = 50;
-    private static Set<Unit> UnitHolder = new HashSet<Unit>();
+
 
     public Unit(int x,int y){   /// default constructor, primarly for constructing player bound units
         this.x = x;
         this.y = y;
-        gV = new Vector3(x, y, 0);
-        UnitHolder.add(this);
+
+        last_position  = new Vector3(x,y,0);
+
     }
 
-    public Unit(int x, int y, boolean isEnemy){ /// constructor for constructing enemy units
+    //type 1 main_character
+    public Unit(int x, int y,int type){ /// constructor for constructing enemy units
         this(x, y);
-        this.isEnemy = isEnemy;
+        this.type = type;
     }
 
     public void setTarget(Vector3 target){
         this.target = target;
         isTargeted = true;
     }
+
+    public void setPosition(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
     @Override
-    public void update(float delta, boolean blocked) {
-        if(blocked) {
-            isTargeted = false;
-            x = gV.x;
-            y = gV.y;
-            return;
-        }
-        gV.set(x,y,0);
+    public void update(float delta) {
+
+       last_position.set(x,y,0);
         if(isTargeted){
             float newX = this.x;
             float newY = this.y;
@@ -58,15 +64,6 @@ public class Unit implements Character {
 
             /// This part should be declared new method, prob. in character interface
             Circle thisBody = new Circle(newX, newY, this.width);
-            for(Unit u : UnitHolder){
-                if(u == this) continue;
-                Circle uBody = new Circle(u.x, u.y, u.width);
-                System.out.println(uBody);
-                if(thisBody.overlaps(uBody)) {
-                    System.out.println("Overlapping");
-                    return;
-                }
-            }
 
             this.x = newX;
             this.y = newY;
@@ -81,7 +78,7 @@ public class Unit implements Character {
         if(isEnemy)
             sr.setColor(Color.FIREBRICK);
         else
-            sr.setColor(Color.BLACK);
+            sr.setColor(Color.FIREBRICK);
         sr.circle(x,y, width);
     }
     @Override
@@ -98,4 +95,17 @@ public class Unit implements Character {
     public Rectangle getBounds() {
         return new Rectangle(x,y,width, width);
     }
+
+    @Override
+    public void  wallColision(Rectangle wall){
+
+        this.x = wall.getX() +wall.getWidth();
+        System.out.println("collision");
+
+    }
+
+    public Vector3 getLast_position(){
+        return last_position;
+    }
+
 }
