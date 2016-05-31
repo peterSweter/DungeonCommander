@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="90" height="18" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="dungeontiles" tilewidth="32" tileheight="32">
+  <image source="dungeontiles.png" width="192" height="320"/>
+ </tileset>
+ <layer name="Copy of Tile Layer 1" width="90" height="18">
+  <data encoding="base64" compression="zlib">
+   eJztlUEKgDAQAws+wH5FL/r/l9mDBynKZkO3thAh5NKyIR3WnFLKAUK+iLmjayvaAUfOenpG587sz56PohNw5KynZ3TuzD4Sz1YOb8763psYPpmcI/Fs5fDmrO+9ieGTycnyXGu5xfwHo/dja5577Wd0H6E9R+/H1jz32s/o+6E9i2fxLJ7Fs3gWz+JZPPfi2crB5mzNM5MziufVoZo7i8u/eWZyRvEs78Oz/JtnKVYXr1T7bw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="90" height="18">
+  <data encoding="base64" compression="zlib">
+   eJztlVEKg0AMRAM9QBV7iX7WH3v/k3UFoSHKOkk3WmGEISjJJgzPbCciXYKQJ6Pvv+tVNAJxzn0uquWgPqN9rxy1z1PRG4ja51oO6jPa98oxyjOSg/qsa2pne+e0dVuK8Omd8yFxnpEc1GddUzvbO6et21KET++c1ucoH33RbVGvvqM+Z+/H1jx742B6RvePqHeR7z5Cfc7ej6159kbrc+v7FfWZPP92v6I+k2fyTJ7JM3kmz+R5f47onK159s6ZyfPdIcvdHpdn8+ydM5NnxvX/ncEz4/q+oo7RBzs9+Uo=
+  </data>
+ </layer>
+</map>
