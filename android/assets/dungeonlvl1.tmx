@@ -3,14 +3,30 @@
  <tileset firstgid="1" name="dungeontiles" tilewidth="32" tileheight="32">
   <image source="dungeontiles.png" width="192" height="320"/>
  </tileset>
- <layer name="Copy of Tile Layer 1" width="90" height="18">
-  <data encoding="base64" compression="zlib">
-   eJztlUEKgDAQAws+wH5FL/r/l9mDBynKZkO3thAh5NKyIR3WnFLKAUK+iLmjayvaAUfOenpG587sz56PohNw5KynZ3TuzD4Sz1YOb8763psYPpmcI/Fs5fDmrO+9ieGTycnyXGu5xfwHo/dja5577Wd0H6E9R+/H1jz32s/o+6E9i2fxLJ7Fs3gWz+JZPPfi2crB5mzNM5MziufVoZo7i8u/eWZyRvEs78Oz/JtnKVYXr1T7bw==
-  </data>
- </layer>
  <layer name="Tile Layer 1" width="90" height="18">
   <data encoding="base64" compression="zlib">
-   eJztlVEKg0AMRAM9QBV7iX7WH3v/k3UFoSHKOkk3WmGEISjJJgzPbCciXYKQJ6Pvv+tVNAJxzn0uquWgPqN9rxy1z1PRG4ja51oO6jPa98oxyjOSg/qsa2pne+e0dVuK8Omd8yFxnpEc1GddUzvbO6et21KET++c1ucoH33RbVGvvqM+Z+/H1jx742B6RvePqHeR7z5Cfc7ej6159kbrc+v7FfWZPP92v6I+k2fyTJ7JM3kmz+R5f47onK159s6ZyfPdIcvdHpdn8+ydM5NnxvX/ncEz4/q+oo7RBzs9+Uo=
+   eJzt1zEOgDAIQFFG49SlJ/H+d3PR0RQaoKjf5E9tJL4OahORFpDm6kGzK7cp0+y1OGvnZmcxGe3H+Z/O+9XTfUfrOOM84+z5HswwW+l8TDprZ37B2fLtgDPOlZ1nnhlnnFf74PyucMa58n+Kl/O9FuHcDeFMnmeAc64zxXYCQVM6Ng==
   </data>
  </layer>
+ <objectgroup name="walls" width="90" height="18">
+  <object name="column" type="1" x="1377" y="97" width="61" height="60"/>
+  <object name="column" type="1" x="1377" y="97" width="61" height="60"/>
+  <object name="column" type="1" x="1378" y="418" width="61" height="60"/>
+  <object name="column" type="1" x="1122" y="418" width="61" height="60"/>
+  <object name="column" type="1" x="1123" y="97" width="61" height="60"/>
+  <object name="wall" type="1" x="0" y="3" width="704" height="31"/>
+  <object name="wall" type="1" x="0" y="3" width="704" height="31"/>
+  <object name="wall" type="1" x="3" y="36" width="59" height="537"/>
+  <object name="wall" type="1" x="63" y="545" width="2817" height="29"/>
+  <object name="wall" type="1" x="2851" y="3" width="37" height="545"/>
+  <object name="wall" type="1" x="995" y="3" width="1855" height="27"/>
+  <object name="wall" type="1" x="2625" y="31" width="33" height="449"/>
+  <object name="wall" type="1" x="2241" y="33" width="32" height="220"/>
+  <object name="wall" type="1" x="2277" y="195" width="249" height="60"/>
+  <object name="wall" type="1" x="385" y="37" width="28" height="156"/>
+  <object x="675" y="37" width="31" height="439"/>
+  <object name="wall" type="1" x="419" y="163" width="187" height="28"/>
+  <object name="wall" type="1" x="709" y="452" width="315" height="29"/>
+  <object name="wall" type="1" x="993" y="35" width="31" height="413"/>
+ </objectgroup>
 </map>
