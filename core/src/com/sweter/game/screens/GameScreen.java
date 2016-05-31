@@ -81,7 +81,9 @@ public class GameScreen implements Screen {
                 return true;
             }
         });
+
         boolean blocked = false;
+
         for (RectangleMapObject rectangleObject : room.getObjects().getByType(RectangleMapObject.class)) {
 
             com.badlogic.gdx.math.Rectangle rectangle = rectangleObject.getRectangle();
@@ -105,7 +107,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(delta);
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
 

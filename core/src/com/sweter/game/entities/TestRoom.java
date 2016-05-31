@@ -19,7 +19,7 @@ public class TestRoom implements Room {
     MapObjects objects;
 
     public TestRoom(){
-        tiledMap = new TmxMapLoader().load("untitled.tmx");
+        tiledMap = new TmxMapLoader().load("dungeonlvl1.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         int objectLayerId = 1;
         objects = tiledMap.getLayers().get(objectLayerId).getObjects();

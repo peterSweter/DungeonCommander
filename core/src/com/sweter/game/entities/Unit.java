@@ -16,7 +16,6 @@ import com.badlogic.gdx.math.Rectangle;
  * Created by peter on 4/27/16.
  */
 public class Unit implements Character {
-
     float x,y;
     Vector3 gV;
     float width = 20;
