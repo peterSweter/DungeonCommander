@@ -19,7 +19,7 @@ public class Unit implements Character {
     float x,y;
 
     Vector3 last_position;
-    float width = 20;
+    float width = 16;
     public Vector3 target;
     boolean isTargeted = false;
     boolean isEnemy = false;

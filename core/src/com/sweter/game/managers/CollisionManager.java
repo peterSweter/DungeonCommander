@@ -3,8 +3,10 @@ package com.sweter.game.managers;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.sweter.game.entities.AstarPathFinder;
 import com.sweter.game.entities.Level;
 import com.sweter.game.entities.Unit;
+import com.sweter.game.interfaces.PathFinder;
 
 import java.util.ArrayList;
 
@@ -16,11 +18,14 @@ public class CollisionManager {
     UnitManager unitManager;
     Level level;
 
+    PathFinder pf;
+
+
     public  CollisionManager(UnitManager unitManager, Level level){
 
         this.unitManager = unitManager;
         this.level = level;
-
+        this.pf = new AstarPathFinder(level, 70);
     }
 
     public void wallCollision() {

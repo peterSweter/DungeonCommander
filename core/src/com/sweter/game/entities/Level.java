@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.sweter.game.interfaces.Character;
 import com.sweter.game.interfaces.Room;
 
 import java.util.ArrayList;
@@ -38,9 +39,6 @@ public class Level implements Room {
     MapObjects objects;
     private ArrayList<Rectangle> walls;
     public int tiledPx = 32;
-    public TiledMapTileLayer tileLayer;
-    public TiledMapTileSets tileSets;
-    public HashMap<Vector3, Integer> tilePositionMapper = new HashMap<Vector3, Integer>();
     private TiledMapTileLayer tileWalls;
 
     public Level(String level_name){
@@ -49,8 +47,7 @@ public class Level implements Room {
         walls = new ArrayList<Rectangle>();
 
         objects = tiledMap.getLayers().get("walls").getObjects();
-        tileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
-        tileSets = tiledMap.getTileSets();
+
 
         for(MapLayer ml : tiledMap.getLayers()){
             System.out.println("ml: " + ml.getName());
@@ -64,18 +61,6 @@ public class Level implements Room {
                 }
             }
         }
-
-        for(TiledMapTileSet t : tileSets){
-            System.out.println("set: " + t.getName());
-            for(TiledMapTile tile : t){
-                /// getting tile id's with corresponding position on map
-                System.out.println("tile: " + tile.getId() + " pos: " + tile.getTextureRegion().getRegionX() + " " + tile.getTextureRegion().getRegionY() + " " + tile.toString());
-                tilePositionMapper.put(new Vector3(tile.getTextureRegion().getRegionX()/tiledPx, tile.getTextureRegion().getRegionY()/tiledPx, 0), tile.getId());
-            }
-        }
-
-
-        System.out.println("creaing tileLayer, height: " + tileLayer.getHeight() + " width: " + tileLayer.getWidth());
 
         for(MapObject object : objects) {
             if (object instanceof RectangleMapObject) {
@@ -124,5 +109,29 @@ public class Level implements Room {
             sr.rect(r.getX(),r.getY(),r.getWidth(),r.getHeight());
         }
     }
+
+    /// functionality necessary for pathfinding
+    public int getWidthInTiles(){
+        return tileWalls.getWidth();
+    }
+    public int getHeightInTiles(){
+        return tileWalls.getHeight();
+    }
+
+    public boolean blocked(Character mv, int x, int y){
+        if(tileWalls.getCell(x,y) != null)
+            return true;
+        return false;
+    }
+
+    public float getCost(Character mv, int sx, int sy, int tx, int ty){
+        /// could be developed in future
+        return 1;
+    }
+    /*
+    public void pathFinderVisited(int x, int y){
+
+    }
+    */
 
 }

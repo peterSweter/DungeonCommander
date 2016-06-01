@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
 
         level_01 = new Level("dungeonlvl1.tmx");
         unitManager = new UnitManager();
-        inputManager = new InputManager(unitManager, camera);
+        inputManager = new InputManager(unitManager, camera, level_01);
         collisionManager = new CollisionManager(unitManager, level_01);
 
 
