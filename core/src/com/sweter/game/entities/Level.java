@@ -126,6 +126,8 @@ public class Level implements Room {
 
     public float getCost(Character mv, int sx, int sy, int tx, int ty){
         /// could be developed in future
+        if(Math.abs(tx - sx) == 1 && Math.abs(ty-sy) == 1)
+            return (float) 1.4;
         return 1;
     }
     /*

@@ -25,7 +25,7 @@ public class Unit implements Character {
     boolean isEnemy = false;
     int type;
 
-    float speed = 50;
+    float speed = 75;
 
 
     public Unit(int x,int y){   /// default constructor, primarly for constructing player bound units

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.sweter.game.entities.AstarPathFinder;
 import com.sweter.game.entities.Path;
+import com.sweter.game.entities.Tile;
 import com.sweter.game.entities.Unit;
 import com.sweter.game.interfaces.PathFinder;
 
@@ -23,6 +24,7 @@ public class UnitManager {
 
     public Unit mainCharacter;
     public Path mainCharacterPath;
+    public int x = 0;
     Unit activeUnit;
 
     public  UnitManager(){
@@ -49,6 +51,20 @@ public class UnitManager {
     }
 
     public void update(float delta){
+        if(mainCharacterPath != null && x < mainCharacterPath.getLength()-1){
+            Tile currentTile = mainCharacterPath.getStep(x);
+            Tile nextTile = mainCharacterPath.getStep(x+1);
+            if(mainCharacterPath != null && x == mainCharacterPath.getLength()-2){
+                mainCharacter.target.set(new Vector3(mainCharacterPath.finalTargetx, mainCharacterPath.finalTargety, 0));
+            }else {
+                mainCharacter.target.set(new Vector3((nextTile.getX() * 32 + 16), (nextTile.getY() * 32 + 16), 0));
+            }
+            if(mainCharacter.getPosition().x >= nextTile.getX()*32 && mainCharacter.getPosition().y >= nextTile.getY()*32){
+                System.out.println("next coords: " + (nextTile.getX()*32+16) + " " + (nextTile.getY()*32 + 16) + " x: " + x);
+                x++;
+            }
+        }
+
         for(Unit u : units){
             u.update(delta);
         }
@@ -56,18 +72,6 @@ public class UnitManager {
     }
 
     public void schapeRender(ShapeRenderer sr){
-      //  Pair<Integer, Integer> currentTile = mainCharacterPath.getStep(0);
-       /* int x = 0;
-        while(x < mainCharacterPath.getLength()-1){
-            Pair<Integer, Integer> currentTile = mainCharacterPath.getStep(x);
-            Pair<Integer, Integer> nextTile = mainCharacterPath.getStep(x+1);
-           // mainCharacter.target.set(new Vector3((nextTile.getKey()*32+32/2), (nextTile.getValue()*32+32/2), 0));
-
-            if(mainCharacter.getPosition().x >= nextTile.getKey()*32 && mainCharacter.getPosition().y >= nextTile.getValue()*32){
-                x++;
-            }
-
-        }*/
 
 
         for(Unit u : units){

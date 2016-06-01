@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.sweter.game.entities.AstarPathFinder;
 import com.sweter.game.entities.Level;
 import com.sweter.game.entities.Path;
+import com.sweter.game.entities.Tile;
 import com.sweter.game.interfaces.PathFinder;
 
 import javafx.util.Pair;
@@ -39,17 +40,21 @@ public class InputManager {
                 camera.unproject(touch_point);
 
                 unitManager.getActiveCharacter().setTarget(touch_point);
+
                 Path testPath = pf.findPath(unitManager.getActiveCharacter(),
                         (int)unitManager.getActiveCharacter().getPosition().x/32, (int)unitManager.getActiveCharacter().getPosition().y/32,
                         (int)touch_point.x/32, (int)touch_point.y/32);
 
-                System.out.println("testpath: " + testPath.getLength());
-                for(Object par : testPath.steps){
-                    System.out.println(par);
+                if(testPath != null) {
+                    System.out.println("testpath: " + testPath.getLength());
+                    for (Tile par : testPath) {
+                        System.out.println(par);
+                    }
                 }
                 testPath.finalTargetx = touch_point.x;
                 testPath.finalTargety = touch_point.y;
                 unitManager.mainCharacterPath = testPath;
+                unitManager.x = 0;
                 return true;
             }
 
