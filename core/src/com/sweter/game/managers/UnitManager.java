@@ -1,5 +1,6 @@
 package com.sweter.game.managers;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.sweter.game.entities.MainCharacter;
@@ -42,10 +43,10 @@ public class UnitManager {
         return units;
     }
 
-    public void render(SpriteBatch sb){
+    public void render(SpriteBatch sb, BitmapFont font){
 
         for(Unit u : units){
-            u.render(sb);
+            u.render(sb, font);
         }
 
     }

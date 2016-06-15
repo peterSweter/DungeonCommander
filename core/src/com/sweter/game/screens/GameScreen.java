@@ -93,10 +93,7 @@ public class GameScreen implements Screen {
 
         level_01.renderTiled(camera);
 
-        game.batch.begin();
-            unitManager.render(game.batch);
 
-        game.batch.end();
 
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             unitManager.schapeRender(game.shapeRenderer);
@@ -112,6 +109,11 @@ public class GameScreen implements Screen {
             unitManager.testingSchapeRender(game.shapeRenderer);
 
         game.shapeRenderer.end();
+
+        game.batch.begin();
+        unitManager.render(game.batch, game.font);
+
+        game.batch.end();
 
 
 

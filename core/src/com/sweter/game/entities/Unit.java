@@ -2,6 +2,7 @@ package com.sweter.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
@@ -16,7 +17,7 @@ import com.badlogic.gdx.math.Rectangle;
  * Created by peter on 4/27/16.
  */
 
-//This class should be abstract.
+//TO DO display different types and actual health status.
 
 public abstract class Unit implements Character {
 
@@ -35,10 +36,12 @@ public abstract class Unit implements Character {
     float speed = 75;
     float width = 16;
     int health = 100;
-    int damage = 10;
+    int attack_damage = 10;
     float attack_speed = 1; // per minute
 
     Rectangle attack_range;
+
+    String type_tag ="unit";
 
 
 
@@ -113,7 +116,11 @@ public abstract class Unit implements Character {
 
     }
     @Override
-    public void render(SpriteBatch sb){
+    public void render(SpriteBatch sb, BitmapFont font){
+        font.setColor(Color.LIME);
+        font.draw(sb, type_tag, position.x -width*1.5f,position.y + width*2f);
+        font.setColor(Color.BLACK);
+        font.draw(sb, ""+health, position.x -width*0.8f,position.y +width*0.5f);
 
     }
 
