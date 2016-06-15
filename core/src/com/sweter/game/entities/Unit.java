@@ -31,6 +31,10 @@ public abstract class Unit implements Character {
     UnitTypes unitType;
 
     Path path;
+    // dynamic path finding is active when a unit targets another unit
+    // it has to recalculate path every so often because of another unit movement
+    boolean dynamicPath = false;
+    Unit dynamicTarget = null;
 
     // unit stats
 
@@ -68,6 +72,7 @@ public abstract class Unit implements Character {
 
         last_position.set(position);
 
+
         pathUpdate();
 
         if(isTargeted){
@@ -98,8 +103,8 @@ public abstract class Unit implements Character {
             target.set(new Vector3((nextTile.getX() * 4), (nextTile.getY() * 4), 0));
 
             if(target == null || !isTargeted){
-                System.out.println("next coords: " + (nextTile.getX()*4) + " " + (nextTile.getY()*4) + " x: " + path.x +
-                " " + path.lvl.blocked(this, nextTile.getX(), nextTile.getY()));
+             //   System.out.println("next coords: " + (nextTile.getX()*4) + " " + (nextTile.getY()*4) + " x: " + path.x +
+              //  " " + path.lvl.blocked(this, nextTile.getX(), nextTile.getY()));
                 isTargeted = true;
                 path.x++;
             }
@@ -157,6 +162,11 @@ public abstract class Unit implements Character {
 
     }
 
+    public void setDynamicPath(Unit u){
+        dynamicPath = true;
+        dynamicTarget = u;
+    }
+
     public Vector3 getLast_position(){
         return last_position;
     }
@@ -170,5 +180,15 @@ public abstract class Unit implements Character {
     }
 
     public abstract void setStats();
+
+
+    /// i need this for pathfinding;
+    public boolean hasDynamicTarget(){
+        return dynamicPath;
+    }
+    public Vector3 dynamicTargetPosition(){
+        return dynamicTarget.getPosition();
+    }
+
 
 }

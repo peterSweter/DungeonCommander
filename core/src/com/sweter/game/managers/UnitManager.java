@@ -31,7 +31,7 @@ import javafx.util.Pair;
  * Created by peter on 5/31/16.
  */
 
-    // todo reading position of units from tiledmaxp file
+    // todo reading position of units from tiledmaxp file   //// ypypypypyp we must do that xD saves a lot of trouble
     // todo combat manager and  ?? from collision manager ??
 
 public class UnitManager {

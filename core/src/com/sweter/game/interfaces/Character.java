@@ -20,6 +20,8 @@ public interface Character {
     public Rectangle getAttackRange();
     public void setStats();
     public void drawAttackRange(ShapeRenderer sr);
+    public boolean hasDynamicTarget();
+    public Vector3 dynamicTargetPosition();
 
     //public
 //public void collisionray();

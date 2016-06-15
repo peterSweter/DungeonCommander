@@ -10,8 +10,11 @@ import com.sweter.game.entities.AstarPathFinder;
 import com.sweter.game.entities.Level;
 import com.sweter.game.entities.Path;
 import com.sweter.game.entities.Tile;
+import com.sweter.game.entities.Unit;
 import com.sweter.game.interfaces.Character;
 import com.sweter.game.interfaces.PathFinder;
+
+import java.util.ArrayList;
 
 import javafx.util.Pair;
 
@@ -41,12 +44,18 @@ public class InputManager {
                 Vector3 touch_point = new Vector3(x, y, 0);
                 camera.unproject(touch_point);
 
+                /// checking if target is unit, it returns reference to targeted unit or null if target is not unit
+                Unit touchIsUnit = checkTouch(touch_point);
 
+                if(touchIsUnit != null)
+                    unitManager.getActiveCharacter().setDynamicPath(touchIsUnit);
 
                 Path testPath = pf.findPath(unitManager.getActiveCharacter(), unitManager.getActiveCharacter().getPosition(), touch_point);
-                unitManager.getActiveCharacter().setTarget(touch_point);
+
 
                 if(testPath != null) {
+                    unitManager.getActiveCharacter().setTarget(new Vector3(testPath.getStep(1).getX(), testPath.getStep(1).getY(), 0));
+                    testPath.x++;
                     unitManager.getActiveCharacter().setPath(testPath);
                 }
                     /*
@@ -73,6 +82,24 @@ public class InputManager {
 
                 //unitManager.getActiveCharacter().setPath(testPath);
                 return true;
+            }
+
+            private Unit checkTouch(Vector3 x){
+                for(Unit u : unitManager.units){
+                    Vector3 targetPosition = u.getPosition();
+
+                    float a = x.x - targetPosition.x;
+                    float b = x.y - targetPosition.y;
+                    float radius = 16f;
+                    a = a*a;
+                    b = b*b;
+                    radius = radius*radius;
+                    if(a+b < radius){
+                        System.out.println("intersects");
+                        return u;
+                    }
+                }
+                return null;
             }
 
             @Override

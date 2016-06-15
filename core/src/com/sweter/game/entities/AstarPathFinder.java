@@ -55,10 +55,22 @@ public class AstarPathFinder implements PathFinder {
 
         System.out.println("input parameters are: (" + sx + ", " + sy + ") and (" + tx + ", " + ty + ")");
 
-        if(map.blocked(toMove, tx, ty)) {
+
+        /*if(toMove.hasDynamicTarget()){
+            Vector3 myPos = toMove.getPosition();
+            Vector3 enemyPos = toMove.dynamicTargetPosition();
+
+            float dist = (myPos.x - enemyPos.x)*(myPos.x - enemyPos.x) + (myPos.y - enemyPos.y)*(myPos.y - enemyPos.y);
+            if(dist <= 16f)
+                return null;
+        }*/
+        if(map.blocked(toMove, tx, ty) || tx < 0 || ty < 0 || (4*tx>=32*map.getWidthInTiles()) || (4*ty>=32*map.getHeightInTiles())) {
             System.out.println("target is blocked!");
             return null;
         }
+
+        /// todo if target is too close to blocked tile, it should be shifted so it's aviable
+        // moveTarget(toMove, tx, ty);
 
         /// init
         nodes[sx][sy].cost = 0;
@@ -145,6 +157,48 @@ public class AstarPathFinder implements PathFinder {
 
             }
         }
+    }
+
+    private void moveTarget(Character mv, Integer tx, Integer ty){
+        boolean tooClose = false;
+        int wallx = 0;
+        int wally = 0;
+        for(int i = 1; i < 4; i++){
+            tooClose = map.blocked(mv, tx+i, ty);
+            if(tooClose){
+                wallx = tx+i;
+                wally = ty;
+                break;
+            }
+            tooClose = map.blocked(mv, tx-i, ty);
+            if(tooClose){
+                wallx = tx-i;
+                wally = ty;
+                break;
+            }
+        }
+        if(tooClose){
+            tx = 4 - (tx - wallx);
+        }
+        tooClose = false;
+        for(int i = 1; i < 4; i++){
+            tooClose = map.blocked(mv, tx, ty+i);
+            if(tooClose){
+                wallx = tx;
+                wally = ty+i;
+                break;
+            }
+            tooClose = map.blocked(mv, tx, ty-i);
+            if(tooClose){
+                wallx = tx;
+                wally = ty-i;
+                break;
+            }
+        }
+        if(tooClose){
+            ty = 4 - (ty - wally);
+        }
+
     }
 
     public boolean inOpenList(Node x){
