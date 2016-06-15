@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="90" height="18" tilewidth="32" tileheight="32" nextobjectid="31">
- <tileset firstgid="1" name="dungeontiles" tilewidth="32" tileheight="32" tilecount="60" columns="6">
+<map version="1.0" orientation="orthogonal" width="90" height="18" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="dungeontiles" tilewidth="32" tileheight="32">
   <image source="dungeontiles.png" width="192" height="320"/>
  </tileset>
  <layer name="Tile Layer 1" width="90" height="18">
@@ -8,40 +8,58 @@
    eJzt2MsKgCAQhWGhRdEmN/Yivf+7RWC0SebMMInaCf5Vkvl1gYohhKhsE7rGIFsyzK1pd8rjXG6bBSyCY1BndN7aIetEx1uckbF0btt5zZWOK+2nM50tzqWmHN8bT4fRGZ1zBGcpOtO5F2fLmiVn7buIznrnt2eAzn06z3Tm/fxD55a+U7yc731fOCdFdGae14DOdZ1HrKX//CdeATrY
   </data>
  </layer>
- <objectgroup name="walls">
-  <object id="1" name="column" type="1" x="1377" y="97" width="61" height="60"/>
-  <object id="2" name="column" type="1" x="1377" y="97" width="61" height="60"/>
-  <object id="3" name="column" type="1" x="1378" y="418" width="61" height="60"/>
-  <object id="4" name="column" type="1" x="1122" y="418" width="61" height="60"/>
-  <object id="5" name="column" type="1" x="1123" y="97" width="61" height="60"/>
-  <object id="6" name="wall" type="1" x="0" y="3" width="704" height="31"/>
-  <object id="7" name="wall" type="1" x="0" y="3" width="704" height="31"/>
-  <object id="8" name="wall" type="1" x="3" y="36" width="59" height="537"/>
-  <object id="9" name="wall" type="1" x="63" y="545" width="2817" height="29"/>
-  <object id="10" name="wall" type="1" x="2851" y="3" width="37" height="545"/>
-  <object id="11" name="wall" type="1" x="995" y="3" width="1855" height="27"/>
-  <object id="12" name="wall" type="1" x="2625" y="31" width="33" height="449"/>
-  <object id="13" name="wall" type="1" x="2241" y="33" width="32" height="220"/>
-  <object id="14" name="wall" type="1" x="2277" y="195" width="249" height="60"/>
-  <object id="15" name="wall" type="1" x="385" y="37" width="28" height="156"/>
-  <object id="16" x="675" y="37" width="31" height="439"/>
-  <object id="17" name="wall" type="1" x="419" y="163" width="187" height="28"/>
-  <object id="18" name="wall" type="1" x="993" y="35" width="31" height="413"/>
-  <object id="19" name="wall" type="1" x="708" y="451" width="315" height="28"/>
-  <object id="20" x="441" y="-13"/>
-  <object id="21" gid="8" x="286" y="273" width="32" height="32"/>
-  <object id="22" gid="8" x="245" y="287" width="32" height="32"/>
-  <object id="23" gid="8" x="183" y="264" width="32" height="32"/>
-  <object id="24" gid="8" x="92" y="247" width="32" height="32"/>
-  <object id="25" gid="8" x="2" y="261" width="32" height="32"/>
-  <object id="26" gid="8" x="-4" y="260" width="32" height="32"/>
-  <object id="27" gid="8" x="2" y="225" width="32" height="32"/>
-  <object id="29" gid="8" x="2855" y="51" width="32" height="32"/>
-  <object id="30" gid="8" x="2842" y="36" width="32" height="32"/>
+ <objectgroup name="walls" width="0" height="0">
+  <object name="column" type="1" x="1377" y="97" width="61" height="60"/>
+  <object name="column" type="1" x="1377" y="97" width="61" height="60"/>
+  <object name="column" type="1" x="1378" y="418" width="61" height="60"/>
+  <object name="column" type="1" x="1122" y="418" width="61" height="60"/>
+  <object name="column" type="1" x="1123" y="97" width="61" height="60"/>
+  <object name="wall" type="1" x="0" y="3" width="704" height="31"/>
+  <object name="wall" type="1" x="0" y="3" width="704" height="31"/>
+  <object name="wall" type="1" x="3" y="36" width="59" height="537"/>
+  <object name="wall" type="1" x="63" y="545" width="2817" height="29"/>
+  <object name="wall" type="1" x="2851" y="3" width="37" height="545"/>
+  <object name="wall" type="1" x="995" y="3" width="1855" height="27"/>
+  <object name="wall" type="1" x="2625" y="31" width="33" height="449"/>
+  <object name="wall" type="1" x="2241" y="33" width="32" height="220"/>
+  <object name="wall" type="1" x="2277" y="195" width="249" height="60"/>
+  <object name="wall" type="1" x="385" y="37" width="28" height="156"/>
+  <object x="675" y="37" width="31" height="439"/>
+  <object name="wall" type="1" x="419" y="163" width="187" height="28"/>
+  <object name="wall" type="1" x="993" y="35" width="31" height="413"/>
+  <object name="wall" type="1" x="708" y="451" width="315" height="28"/>
+  <object x="441" y="-13"/>
+  <object gid="8" x="286" y="273" width="32" height="32"/>
+  <object gid="8" x="245" y="287" width="32" height="32"/>
+  <object gid="8" x="183" y="264" width="32" height="32"/>
+  <object gid="8" x="92" y="247" width="32" height="32"/>
+  <object gid="8" x="2" y="261" width="32" height="32"/>
+  <object gid="8" x="-4" y="260" width="32" height="32"/>
+  <object gid="8" x="2" y="225" width="32" height="32"/>
+  <object gid="8" x="2855" y="51" width="32" height="32"/>
+  <object gid="8" x="2842" y="36" width="32" height="32"/>
  </objectgroup>
  <layer name="Walls" width="90" height="18">
   <data encoding="base64" compression="zlib">
    eJztmDEKwCAMRbN1dMv9j9pCEbRETcDG1P4Hf9EY5Q2CJiJKk8NXDkX4R8lutGhqLZ6jYj1brx6e2+zsmYUxy/xM4NmHCJ5bKfvi3qjnrJ61e+7geZRnfa8XPMvAc0zg2Qd49gGefYBnH77kOdI7xcoqz9pI60Z9I7LCM6iBZx9Kz2/9byN3TrnCHSU=
   </data>
  </layer>
+ <objectgroup name="Units" width="90" height="18">
+  <object name="axeman" x="127" y="415" width="32" height="32"/>
+  <object name="main_character" x="128" y="334" width="32" height="32"/>
+  <object name="swordsman" x="185" y="379" width="32" height="32"/>
+  <object name="enemy" x="447" y="54" width="32" height="32"/>
+  <object name="enemy" x="507" y="56" width="32" height="32"/>
+  <object name="enemy" x="460" y="390" width="32" height="32"/>
+  <object name="enemy" x="1226" y="210" width="32" height="32"/>
+  <object name="enemy" x="1298" y="217" width="32" height="32"/>
+  <object name="enemy" x="1229" y="268" width="32" height="32"/>
+  <object name="enemy" x="1303" y="281" width="32" height="32"/>
+  <object name="enemy" x="2212" y="316" width="32" height="32"/>
+  <object name="enemy" x="2216" y="386" width="32" height="32"/>
+  <object name="enemy" x="2219" y="442" width="32" height="32"/>
+  <object name="enemy" x="2728" y="183" width="32" height="32"/>
+  <object name="enemy" x="2734" y="250" width="32" height="32"/>
+  <object name="enemy" x="2732" y="325" width="32" height="32"/>
+ </objectgroup>
 </map>

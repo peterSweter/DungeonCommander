@@ -36,8 +36,7 @@ import java.util.HashSet;
  * Created by peter on 5/4/16.
  */
 public class Level implements Room {
-
-    private TiledMap tiledMap;
+    public TiledMap tiledMap;
     TiledMapRenderer tiledMapRenderer;
     MapObjects objects;
     private ArrayList<Rectangle> walls;
@@ -96,6 +95,8 @@ public class Level implements Room {
         }
 
     }
+
+
 
     public ArrayList<Rectangle> getWalls(){
         return walls;
