@@ -15,8 +15,11 @@ public class Path implements Iterable<Tile>{
     public float finalTargetx;
     public float finalTargety;
     private Level lvl;
+    public int x;
+
     public Path(Level lvl){
         this.lvl = lvl;
+        this.x=0;
     }
 
     public int getLength(){

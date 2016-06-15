@@ -15,31 +15,43 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Created by peter on 4/27/16.
  */
+
 public class Unit implements Character {
-    float x,y;
 
     Vector3 last_position;
-    float width = 16;
+    Vector3 position;
+
     public Vector3 target;
     boolean isTargeted = false;
     boolean isEnemy = false;
-    int type;
+    UnitTypes unitType;
+
+    Path path;
+
+    // unit stats
 
     float speed = 75;
+    float width = 16;
+    int health = 100;
+    int damage = 10;
+    float attack_speed = 1; // one per second ??
+
+    Rectangle attack_range;
+
 
 
     public Unit(int x,int y){   /// default constructor, primarly for constructing player bound units
-        this.x = x;
-        this.y = y;
 
+        position = new Vector3(x,y,0);
         last_position  = new Vector3(x,y,0);
 
     }
 
     //type 1 main_character
-    public Unit(int x, int y,int type){ /// constructor for constructing enemy units
+    public Unit(int x, int y,UnitTypes unitType){ /// constructor for constructing enemy units
         this(x, y);
-        this.type = type;
+        this.unitType = unitType;
+
     }
 
     public void setTarget(Vector3 target){
@@ -48,27 +60,45 @@ public class Unit implements Character {
     }
 
     public void setPosition(float x, float y){
-        this.x = x;
-        this.y = y;
+        position.set(x, y ,0);
     }
 
     @Override
     public void update(float delta) {
 
-       last_position.set(x,y,0);
+        last_position.set(position);
+
+        pathUpdate();
+
         if(isTargeted){
-            float newX = this.x;
-            float newY = this.y;
-            newX += Math.signum(target.x - this.x) * delta * speed;
-            newY += Math.signum(target.y - this.y) * delta * speed;
+            float newX = position.x;
+            float newY = position.y;
+            newX += Math.signum(target.x - position.x) * delta * speed;
+            newY += Math.signum(target.y - position.y) * delta * speed;
 
             /// This part should be declared new method, prob. in character interface
             Circle thisBody = new Circle(newX, newY, this.width);
 
-            this.x = newX;
-            this.y = newY;
-            if((Math.abs(target.x - this.x) < 0.5) && (Math.abs(target.y - this.y)< 0.5)){
+            position.set(newX, newY, 0);
+
+            if((Math.abs(target.x - position.x) < 4) && (Math.abs(target.y - position.y)< 4)){
                 isTargeted = false;
+            }
+        }
+    }
+
+    public void pathUpdate(){
+        if(path != null && path.x < path.getLength()-1){
+            Tile currentTile = path.getStep(path.x);
+            Tile nextTile = path.getStep(path.x+1);
+            if(path != null && path.x == path.getLength()-2){
+               target.set(new Vector3(path.finalTargetx, path.finalTargety, 0));
+            }else {
+                target.set(new Vector3((nextTile.getX() * 32 + 16), (nextTile.getY() * 32 + 16), 0));
+            }
+            if(getPosition().x >= nextTile.getX()*32 && getPosition().y >= nextTile.getY()*32){
+                System.out.println("next coords: " + (nextTile.getX()*32+16) + " " + (nextTile.getY()*32 + 16) + " x: " + path.x);
+                path.x++;
             }
         }
     }
@@ -79,7 +109,7 @@ public class Unit implements Character {
             sr.setColor(Color.FIREBRICK);
         else
             sr.setColor(Color.FIREBRICK);
-        sr.circle(x,y, width);
+        sr.circle(position.x, position.y, width);
 
         //drawBounds(sr);
     }
@@ -90,13 +120,13 @@ public class Unit implements Character {
 
     @Override
     public Vector3 getPosition() {
-        return new Vector3(x, y, 0);
+        return position;
     }
 
     @Override
     public Rectangle getBounds() {
         //drawing bounds for testing purposes
-        return new Rectangle(x-width,y-width,width*2, width*2);
+        return new Rectangle(position.x-width,position.y-width,width*2, width*2);
 
     }
 
@@ -109,13 +139,21 @@ public class Unit implements Character {
     @Override
     public void  wallColision(Rectangle wall){
 
-        this.x = wall.getX() +wall.getWidth();
+        position.x = wall.getX() +wall.getWidth();
         System.out.println("collision");
 
     }
 
     public Vector3 getLast_position(){
         return last_position;
+    }
+
+    public void setPath(Path path){
+        this.path = path;
+    }
+
+    public Rectangle getAttackRange(){
+        return attack_range;
     }
 
 }

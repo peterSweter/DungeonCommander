@@ -45,16 +45,19 @@ public class InputManager {
                         (int)unitManager.getActiveCharacter().getPosition().x/32, (int)unitManager.getActiveCharacter().getPosition().y/32,
                         (int)touch_point.x/32, (int)touch_point.y/32);
 
+                /*
+                --- printing smth with path finding---
                 if(testPath != null) {
                     System.out.println("testpath: " + testPath.getLength());
                     for (Tile par : testPath) {
                         System.out.println(par);
                     }
-                }
+                }*/
+
                 testPath.finalTargetx = touch_point.x;
                 testPath.finalTargety = touch_point.y;
-                unitManager.mainCharacterPath = testPath;
-                unitManager.x = 0;
+
+                unitManager.getActiveCharacter().setPath(testPath);
                 return true;
             }
 
