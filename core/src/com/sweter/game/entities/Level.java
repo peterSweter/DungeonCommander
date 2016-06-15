@@ -1,6 +1,7 @@
 package com.sweter.game.entities;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
@@ -23,11 +24,13 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.BooleanArray;
 import com.sweter.game.interfaces.Character;
 import com.sweter.game.interfaces.Room;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by peter on 5/4/16.
@@ -40,11 +43,13 @@ public class Level implements Room {
     private ArrayList<Rectangle> walls;
     public int tiledPx = 32;
     private TiledMapTileLayer tileWalls;
+    public HashSet<Vector3> wallsSet;
 
     public Level(String level_name){
         tiledMap = new TmxMapLoader().load(level_name);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         walls = new ArrayList<Rectangle>();
+        wallsSet = new HashSet<Vector3>();
 
         objects = tiledMap.getLayers().get("walls").getObjects();
 
@@ -56,10 +61,17 @@ public class Level implements Room {
         for(int x = 0; x < tileWalls.getWidth(); x++){
             for(int y = 0; y < tileWalls.getHeight(); y++){
                 if(tileWalls.getCell(x, y)!=null) {
-                    System.out.println(x + " " + y + " : " + tileWalls.getCell(x, y).getTile());
+                    System.out.println(x + " " + y + " : ");
                     System.out.println("position: " + x*32 + " " + y*32 );
+                    //adding blocked cells to set
+                    addToSet(x, y);
                 }
             }
+        }
+
+        System.out.println("walls are");
+        for(Vector3 x : wallsSet){
+            System.out.println(x.x + " "+ x.y);
         }
 
         for(MapObject object : objects) {
@@ -96,6 +108,15 @@ public class Level implements Room {
         tiledMapRenderer.render();
     }
 
+    private void addToSet(int x, int y){
+        //adding blocked cells to set
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                wallsSet.add(new Vector3(8*x + i, 8*y + j, 0));
+            }
+        }
+    }
+
 
 
     @Override
@@ -119,8 +140,12 @@ public class Level implements Room {
     }
 
     public boolean blocked(Character mv, int x, int y){
-        if(tileWalls.getCell(x,y) != null)
+        /// this function gets x,y coords on 4PX (!!!) map tile, should convert it to 32 px map
+        if(wallsSet.contains(new Vector3((float)x, (float)y, 0))){
+            System.out.println("this cell is blocked!: " + x + " " + y);
+
             return true;
+        }
         return false;
     }
 

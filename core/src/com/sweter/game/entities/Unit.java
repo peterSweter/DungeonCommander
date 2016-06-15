@@ -2,6 +2,7 @@ package com.sweter.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -89,16 +90,14 @@ public abstract class Unit implements Character {
     }
 
     public void pathUpdate(){
+
         if(path != null && path.x < path.getLength()-1){
             Tile currentTile = path.getStep(path.x);
             Tile nextTile = path.getStep(path.x+1);
-            if(path != null && path.x == path.getLength()-2){
-               target.set(new Vector3(path.finalTargetx, path.finalTargety, 0));
-            }else {
-                target.set(new Vector3((nextTile.getX() * 32 + 16), (nextTile.getY() * 32 + 16), 0));
-            }
-            if(getPosition().x >= nextTile.getX()*32 && getPosition().y >= nextTile.getY()*32){
-                System.out.println("next coords: " + (nextTile.getX()*32+16) + " " + (nextTile.getY()*32 + 16) + " x: " + path.x);
+            target.set(new Vector3((nextTile.getX() * 4), (nextTile.getY() * 4), 0));
+
+            if(target == null || target == getPosition()){
+                System.out.println("next coords: " + (nextTile.getX()*4) + " " + (nextTile.getY()*4) + " x: " + path.x);
                 path.x++;
             }
         }

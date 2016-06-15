@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="90" height="18">
   <data encoding="base64" compression="zlib">
-   eJzt2EEKgCAQhWGhTbTJjV2k+98tAqVNMm+GSSZ5wb9KMr9IqJxSysp2oXsMchTD3JoOpzzupdmsYBkcgzqj844OWSc63uKMjKVzbOet1ruudJ7OdLY491pq3DeeTqMzOucMzlJ0pvNfnC1rlpy1exGd9c5v7wCd6Rw1OtM58neKl3M794VzUURn5vkM6DzWecYi/ee/ABvVOtE=
+   eJzt2MsKgCAQhWGhRdEmN/Yivf+7RWC0SebMMInaCf5Vkvl1gYohhKhsE7rGIFsyzK1pd8rjXG6bBSyCY1BndN7aIetEx1uckbF0btt5zZWOK+2nM50tzqWmHN8bT4fRGZ1zBGcpOtO5F2fLmiVn7buIznrnt2eAzn06z3Tm/fxD55a+U7yc731fOCdFdGae14DOdZ1HrKX//CdeATrY
   </data>
  </layer>
  <objectgroup name="walls">
@@ -41,7 +41,7 @@
  </objectgroup>
  <layer name="Walls" width="90" height="18">
   <data encoding="base64" compression="zlib">
-   eJztmEEKwCAMBPMDb/n/U3sohbZETahdU7sDe9EYwhwELSJSBkfFh/4ohxsvntqI56xEZ2vV03OdlT2rsRbZHwk9Y8jguZbojLw3nrGK517u9a1e9GxDzzmhZwz0jIGeMdAzhi95zvROiTLLszfWuV7fjMzwTK7QM4az57f+t5k9G2VQGbM=
+   eJztmDEKwCAMRbN1dMv9j9pCEbRETcDG1P4Hf9EY5Q2CJiJKk8NXDkX4R8lutGhqLZ6jYj1brx6e2+zsmYUxy/xM4NmHCJ5bKfvi3qjnrJ61e+7geZRnfa8XPMvAc0zg2Qd49gGefYBnH77kOdI7xcoqz9pI60Z9I7LCM6iBZx9Kz2/9byN3TrnCHSU=
   </data>
  </layer>
 </map>

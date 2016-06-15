@@ -1,7 +1,12 @@
 package com.sweter.game.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.model.Node;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.sweter.game.dungeonCommander;
 import com.sweter.game.interfaces.Character;
 import com.sweter.game.interfaces.PathFinder;
 
@@ -27,18 +32,33 @@ public class AstarPathFinder implements PathFinder {
         this.map = map;
         this.maxSearchDistance = maxSearchDistance;
 
-        nodes = new Node[map.getWidthInTiles()][map.getHeightInTiles()];
-        for(int x = 0; x<map.getWidthInTiles(); x++){
-            for(int y = 0; y<map.getHeightInTiles(); y++){
+        nodes = new Node[8*map.getWidthInTiles()][8*map.getHeightInTiles()];
+        System.out.println("nodes size is: " + 8*map.getHeightInTiles() + " " + 4*map.getWidthInTiles());
+        System.out.println("map size is: " + map.getHeightInTiles() + " " + map.getWidthInTiles());
+
+
+        for(int x = 0; x<8*map.getWidthInTiles(); x++){
+            for(int y = 0; y<8*map.getHeightInTiles(); y++){
                 nodes[x][y] = new Node(x, y);
             }
         }
     }
 
-    public Path findPath(Character toMove, int sx, int sy, int tx, int ty){
+    public Path findPath(Character toMove, Vector3 s, Vector3 t){
         /// if destination is blocked we can't find any path
-        if(map.blocked(toMove, tx, ty))
+        int sx = (int) (s.x/4);
+        int sy = (int) (s.y/4);
+        int tx = (int) (t.x/4);
+        int ty = (int) (t.y/4);
+
+        clear();
+
+        System.out.println("input parameters are: (" + sx + ", " + sy + ") and (" + tx + ", " + ty + ")");
+
+        if(map.blocked(toMove, tx, ty)) {
+            System.out.println("target is blocked!");
             return null;
+        }
 
         /// init
         nodes[sx][sy].cost = 0;
@@ -70,6 +90,7 @@ public class AstarPathFinder implements PathFinder {
                     /// neighbour location
                     int xp = x + current.x;
                     int yp = y + current.y;
+
 
                     if(isValidLocation(toMove, sx, sy, xp, yp)){
 
@@ -112,6 +133,18 @@ public class AstarPathFinder implements PathFinder {
         return path;
     }
 
+    private void clear(){
+        for(int x = 0; x<8*map.getWidthInTiles(); x++){
+            for(int y = 0; y<8*map.getHeightInTiles(); y++){
+                nodes[x][y].cost = 0;
+                nodes[x][y].parent = null;
+                nodes[x][y].heuristic = 0;
+                nodes[x][y].depth = 0;
+
+            }
+        }
+    }
+
     public boolean inOpenList(Node x){
         return open.contains(x);
     }
@@ -136,6 +169,20 @@ public class AstarPathFinder implements PathFinder {
         closed.remove(x);
     }
 
+    /// for debugging
+    public void drawBound(ShapeRenderer sr) {
+        for(Node n : open){
+            sr.setColor(Color.GREEN);
+            sr.rect(n.getX(),n.getY(),32,32);
+
+        }
+        for(Node r : closed){
+            sr.setColor(Color.GRAY);
+            sr.rect(r.getX(),r.getY(),32,32);
+        }
+
+    }
+
     public Node getSmallestInOpen(){
         Node x = null;
         for(Node n : open){
@@ -149,16 +196,18 @@ public class AstarPathFinder implements PathFinder {
     }
 
     public float getHeuristicCost(Character mv, int x, int y, int tx, int ty){
-        float dx = tx - x;
-        float dy = ty - y;
+
+        float dx = 4*tx - 4*x;
+        float dy = 4*ty - 4*y;
         float result = (float) (Math.sqrt(dx*dx + dy*dy));
         return result;
     }
 
     private boolean isValidLocation(Character mv, int sx, int sy, int x, int y){
-        boolean invalid = (x<0) || (y<0) || (x>=map.getWidthInTiles()) || (y>=map.getHeightInTiles());
+        boolean invalid = (x<0) || (y<0) || (4*x>=32*map.getWidthInTiles()) || (4*y>=32*map.getHeightInTiles());
         if(!invalid && sx!=x || sy!=y){
             invalid = map.blocked(mv, x, y);
+            //System.out.println("Checking if neighbour is valid: " + invalid + " x: " + x + " " + y);
         }
         return !invalid;
     }
@@ -186,6 +235,13 @@ public class AstarPathFinder implements PathFinder {
             this.parent = parent;
 
             return depth;
+        }
+
+        public int getX(){
+            return x;
+        }
+        public int getY(){
+            return y;
         }
 
         @Override

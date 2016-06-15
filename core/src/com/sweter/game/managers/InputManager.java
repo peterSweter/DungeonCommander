@@ -27,7 +27,7 @@ public class InputManager {
         this.unitManager = unitManager;
         this.camera = camera;
         this.level = level;
-        pf = new AstarPathFinder(level, 70);
+        pf = new AstarPathFinder(level, 200);
     }
 
     public void update(){
@@ -39,11 +39,12 @@ public class InputManager {
                 Vector3 touch_point = new Vector3(x, y, 0);
                 camera.unproject(touch_point);
 
-                unitManager.getActiveCharacter().setTarget(touch_point);
 
-                Path testPath = pf.findPath(unitManager.getActiveCharacter(),
-                        (int)unitManager.getActiveCharacter().getPosition().x/32, (int)unitManager.getActiveCharacter().getPosition().y/32,
-                        (int)touch_point.x/32, (int)touch_point.y/32);
+
+                Path testPath = pf.findPath(unitManager.getActiveCharacter(), unitManager.getActiveCharacter().getPosition(), touch_point);
+
+                if(testPath != null)
+                    unitManager.getActiveCharacter().setTarget(touch_point);
 
                 /*
                 --- printing smth with path finding---
@@ -53,11 +54,17 @@ public class InputManager {
                         System.out.println(par);
                     }
                 }*/
+                /*
+                --- testing path --- :v :v :v
+                for(int i = 0; i < testPath.getLength(); i++){
+                    System.out.println("path is: " + testPath.getStep(i));
+                }*/
+                if(testPath != null) {
+                    testPath.finalTargetx = touch_point.x;
+                    testPath.finalTargety = touch_point.y;
+                }
 
-                testPath.finalTargetx = touch_point.x;
-                testPath.finalTargety = touch_point.y;
-
-                unitManager.getActiveCharacter().setPath(testPath);
+                //unitManager.getActiveCharacter().setPath(testPath);
                 return true;
             }
 

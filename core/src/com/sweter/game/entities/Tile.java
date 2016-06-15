@@ -26,7 +26,7 @@ public class Tile {
         sb.append(x);
         sb.append(" ");
         sb.append(y);
-        sb.append(" pixel coors: " + 32*x + " " + 32*y + " x " + (32*(x+1)) + " " + (32*(y+1)));
+        sb.append(" pixel coors: " + 4*x + " " + 4*y + " x " + (4*(x+1)) + " " + (4*(y+1)));
         return sb.toString();
     }
 }

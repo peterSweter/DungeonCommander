@@ -25,20 +25,21 @@ public class CollisionManager {
 
         this.unitManager = unitManager;
         this.level = level;
-        this.pf = new AstarPathFinder(level, 70);
+      //  this.pf = new AstarPathFinder(level, 70);
     }
 
     public void wallCollision() {
+
         for (Unit u : unitManager.getUnits()) {
 
             for(Rectangle r :level.getWalls()){
 
                 if (Intersector.overlaps(r, u.getBounds())){
-                    System.out.println("collision");
+                   // System.out.println("collision");
 
                     Vector3 currentPosition = new Vector3(u.getPosition());
 
-                    u.setPosition(u.getLast_position().x, currentPosition.y);
+                     u.setPosition(u.getLast_position().x, currentPosition.y);
 
                     if (!Intersector.overlaps(r, u.getBounds())) {
                         continue;
