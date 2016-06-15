@@ -107,11 +107,7 @@ public abstract class Unit implements Character {
     @Override
     public void sRender(ShapeRenderer sr) {
 
-
-        if(isEnemy)
-            sr.setColor(Color.FIREBRICK);
-        else
-            sr.setColor(Color.FIREBRICK);
+        sr.setColor(Color.FIREBRICK);
         sr.circle(position.x, position.y, width);
 
     }
@@ -119,7 +115,7 @@ public abstract class Unit implements Character {
     public void render(SpriteBatch sb, BitmapFont font){
         font.setColor(Color.LIME);
         font.draw(sb, type_tag, position.x -width*1.5f,position.y + width*2f);
-        font.setColor(Color.BLACK);
+        font.setColor(Color.WHITE);
         font.draw(sb, ""+health, position.x -width*0.8f,position.y +width*0.5f);
 
     }
