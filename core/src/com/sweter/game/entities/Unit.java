@@ -16,7 +16,9 @@ import com.badlogic.gdx.math.Rectangle;
  * Created by peter on 4/27/16.
  */
 
-public class Unit implements Character {
+//This class should be abstract.
+
+public abstract class Unit implements Character {
 
     Vector3 last_position;
     Vector3 position;
@@ -34,7 +36,7 @@ public class Unit implements Character {
     float width = 16;
     int health = 100;
     int damage = 10;
-    float attack_speed = 1; // one per second ??
+    float attack_speed = 1; // per minute
 
     Rectangle attack_range;
 
@@ -47,12 +49,6 @@ public class Unit implements Character {
 
     }
 
-    //type 1 main_character
-    public Unit(int x, int y,UnitTypes unitType){ /// constructor for constructing enemy units
-        this(x, y);
-        this.unitType = unitType;
-
-    }
 
     public void setTarget(Vector3 target){
         this.target = target;
@@ -85,6 +81,8 @@ public class Unit implements Character {
                 isTargeted = false;
             }
         }
+
+        attack_range.setPosition(position.x -attack_range.width/2, position.y-attack_range.height/2);
     }
 
     public void pathUpdate(){
@@ -105,13 +103,14 @@ public class Unit implements Character {
 
     @Override
     public void sRender(ShapeRenderer sr) {
+
+
         if(isEnemy)
             sr.setColor(Color.FIREBRICK);
         else
             sr.setColor(Color.FIREBRICK);
         sr.circle(position.x, position.y, width);
 
-        //drawBounds(sr);
     }
     @Override
     public void render(SpriteBatch sb){
@@ -136,6 +135,15 @@ public class Unit implements Character {
         sr.rect(r.getX(),r.getY(),r.getWidth(),r.getHeight());
     }
 
+    public void drawAttackRange(ShapeRenderer sr){
+
+        sr.setColor(Color.WHITE);
+        Rectangle r = getAttackRange();
+
+        sr.rect(r.getX(),r.getY(),r.getWidth(),r.getHeight());
+
+    }
+
     @Override
     public void  wallColision(Rectangle wall){
 
@@ -155,5 +163,7 @@ public class Unit implements Character {
     public Rectangle getAttackRange(){
         return attack_range;
     }
+
+    public abstract void setStats();
 
 }

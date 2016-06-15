@@ -100,11 +100,20 @@ public class GameScreen implements Screen {
 
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             unitManager.schapeRender(game.shapeRenderer);
-            //drawing wall bounds from level 01
-            level_01.drawBound(game.shapeRenderer);
-
 
         game.shapeRenderer.end();
+
+        // testing srenderer
+
+        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
+            //drawing wall bounds from level 01
+            level_01.drawBound(game.shapeRenderer);
+            unitManager.testingSchapeRender(game.shapeRenderer);
+
+        game.shapeRenderer.end();
+
+
 
       //  System.out.println("debug tileLayer, height: " + (int)unitManager.mainCharacter.getPosition().x/32 + " " + (int)unitManager.mainCharacter.getPosition().y/32);
 

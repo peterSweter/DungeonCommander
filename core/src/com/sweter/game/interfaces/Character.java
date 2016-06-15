@@ -16,6 +16,10 @@ public interface Character {
     public Vector3 getPosition();
     public Rectangle getBounds();
     public void wallColision(Rectangle wall);
+    public Rectangle getAttackRange();
+    public void setStats();
+    public void drawAttackRange(ShapeRenderer sr);
+
     //public
 //public void collisionray();
 }
