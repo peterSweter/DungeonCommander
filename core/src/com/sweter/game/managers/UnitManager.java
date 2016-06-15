@@ -25,7 +25,7 @@ public class UnitManager {
     ArrayList<Unit> alies;
     ArrayList<Unit> enemies;
 
-    public Unit mainCharacter;
+    public Unit mainCharacter, axeMan, swordsMan;
     public Path mainCharacterPath;
     public int x = 0;
     Unit activeUnit;
@@ -37,10 +37,13 @@ public class UnitManager {
 
 
         mainCharacter = new MainCharacter(320,200);
+        swordsMan = new SwordsMan(370,200);
+        axeMan= new AxeMan(320,250);
+
         activeUnit = mainCharacter;
         units.add(mainCharacter);
-        units.add(new AxeMan(360, 200));
-        units.add(new SwordsMan(360, 250));
+        units.add(axeMan);
+        units.add(swordsMan);
     }
 
     public ArrayList<Unit> getUnits(){
@@ -81,5 +84,9 @@ public class UnitManager {
 
     public Unit getActiveCharacter(){
         return activeUnit;
+    }
+
+    public void setActiveUnit(Unit  unit){
+        this.activeUnit = unit;
     }
 }

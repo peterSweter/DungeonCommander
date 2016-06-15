@@ -2,6 +2,7 @@ package com.sweter.game.managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
@@ -66,6 +67,22 @@ public class InputManager {
 
 
                 return true;
+            }
+
+            @Override public boolean keyDown (int keycode) {
+                switch (keycode){
+                    case Input.Keys.Q:
+                        unitManager.setActiveUnit(unitManager.mainCharacter);
+                        break;
+                    case Input.Keys.W:
+                        unitManager.setActiveUnit(unitManager.axeMan);
+                        break;
+                    case Input.Keys.E:
+                        unitManager.setActiveUnit(unitManager.swordsMan);
+                        break;
+                }
+
+                return false;
             }
         });
     }
