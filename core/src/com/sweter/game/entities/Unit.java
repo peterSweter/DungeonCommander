@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Rectangle;
  * Created by peter on 4/27/16.
  */
 
-//TO DO display different types and actual health status.
+//TO DO user ui to change active unit.
 
 public abstract class Unit implements Character {
 

@@ -3,8 +3,10 @@ package com.sweter.game.managers;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.sweter.game.entities.AxeMan;
 import com.sweter.game.entities.MainCharacter;
 import com.sweter.game.entities.Path;
+import com.sweter.game.entities.SwordsMan;
 import com.sweter.game.entities.Unit;
 import com.sweter.game.entities.UnitTypes;
 
@@ -37,6 +39,8 @@ public class UnitManager {
         mainCharacter = new MainCharacter(320,200);
         activeUnit = mainCharacter;
         units.add(mainCharacter);
+        units.add(new AxeMan(360, 200));
+        units.add(new SwordsMan(360, 250));
     }
 
     public ArrayList<Unit> getUnits(){

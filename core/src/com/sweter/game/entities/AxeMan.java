@@ -9,6 +9,7 @@ public class AxeMan extends Unit {
     public AxeMan(int x, int y) {
         super(x, y);
         this.unitType = UnitTypes.AXEMAN;
+        setStats();
     }
 
     @Override

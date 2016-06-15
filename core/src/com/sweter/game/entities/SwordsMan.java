@@ -9,6 +9,7 @@ public class SwordsMan extends Unit {
     public SwordsMan(int x, int y) {
         super(x, y);
         this.unitType = UnitTypes.SWORDSMAN;
+        setStats();
     }
 
     @Override
