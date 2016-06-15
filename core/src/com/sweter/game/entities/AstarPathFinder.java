@@ -110,6 +110,8 @@ public class AstarPathFinder implements PathFinder {
                         if(!inOpenList(neighbour) && !inClosedList(neighbour)){
                             neighbour.cost = nextStepCost;
                             neighbour.heuristic = getHeuristicCost(toMove, xp, yp, tx, ty);
+                         //   System.out.println("trying to append while current is... " + map.blocked(toMove, current.x, current.y )
+                         //   + " and neighbor is... " + map.blocked(toMove, neighbour.x, neighbour.y));
                             maxDepth = Math.max(maxDepth, neighbour.setParent(current));
                             addToOpen(neighbour);
                         }
@@ -207,6 +209,38 @@ public class AstarPathFinder implements PathFinder {
         boolean invalid = (x<0) || (y<0) || (4*x>=32*map.getWidthInTiles()) || (4*y>=32*map.getHeightInTiles());
         if(!invalid && sx!=x || sy!=y){
             invalid = map.blocked(mv, x, y);
+
+
+            /// left, right, up and down
+            for(int i = 1; i < 4; i++){
+                invalid = map.blocked(mv, x+i, y);
+                if(invalid)
+                    return !invalid;
+                invalid = map.blocked(mv, x-i, y);
+                if(invalid)
+                    return !invalid;
+                invalid = map.blocked(mv, x, y+i);
+                if(invalid)
+                    return !invalid;
+                invalid = map.blocked(mv, x, y-i);
+                if(invalid)
+                    return !invalid;
+            }
+            /// checking corners
+            for(int i = 1; i < 3; i++){
+                invalid = map.blocked(mv, x-i, y+i);
+                if(invalid)
+                    return !invalid;
+                invalid = map.blocked(mv, x+i, y+i);
+                if(invalid)
+                    return !invalid;
+                invalid = map.blocked(mv, x-i, y-i);
+                if(invalid)
+                    return !invalid;
+                invalid = map.blocked(mv, x+1, y-i);
+                if(invalid)
+                    return !invalid;
+            }
             //System.out.println("Checking if neighbour is valid: " + invalid + " x: " + x + " " + y);
         }
         return !invalid;

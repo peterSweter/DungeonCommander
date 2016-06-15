@@ -10,6 +10,7 @@ import com.sweter.game.entities.AstarPathFinder;
 import com.sweter.game.entities.Level;
 import com.sweter.game.entities.Path;
 import com.sweter.game.entities.Tile;
+import com.sweter.game.interfaces.Character;
 import com.sweter.game.interfaces.PathFinder;
 
 import javafx.util.Pair;
@@ -43,11 +44,12 @@ public class InputManager {
 
 
                 Path testPath = pf.findPath(unitManager.getActiveCharacter(), unitManager.getActiveCharacter().getPosition(), touch_point);
+                unitManager.getActiveCharacter().setTarget(touch_point);
 
-                if(testPath != null)
-                    unitManager.getActiveCharacter().setTarget(touch_point);
-
-                /*
+                if(testPath != null) {
+                    unitManager.getActiveCharacter().setPath(testPath);
+                }
+                    /*
                 --- printing smth with path finding---
                 if(testPath != null) {
                     System.out.println("testpath: " + testPath.getLength());
@@ -56,9 +58,13 @@ public class InputManager {
                     }
                 }*/
                 /*
-                --- testing path --- :v :v :v
-                for(int i = 0; i < testPath.getLength(); i++){
-                    System.out.println("path is: " + testPath.getStep(i));
+                //--- testing path --- :v :v :v
+                if(testPath != null) {
+                    Character curr = unitManager.getActiveCharacter();
+                    for (int i = 0; i < testPath.getLength(); i++) {
+                        System.out.println("path is: " + testPath.getStep(i) + "and on path it's: " +
+                                level.blocked(curr, testPath.getStep(i).getX(), testPath.getStep(i).getY()));
+                    }
                 }*/
                 if(testPath != null) {
                     testPath.finalTargetx = touch_point.x;

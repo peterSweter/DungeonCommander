@@ -30,7 +30,7 @@ public class CollisionManager {
 
     public void wallCollision() {
 
-        for (Unit u : unitManager.getUnits()) {
+/*        for (Unit u : unitManager.getUnits()) {
 
             for(Rectangle r :level.getWalls()){
 
@@ -58,7 +58,7 @@ public class CollisionManager {
 
             }
 
-        }
+        }*/
     }
 
     public void update(){

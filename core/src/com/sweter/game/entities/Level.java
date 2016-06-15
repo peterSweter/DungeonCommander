@@ -111,8 +111,8 @@ public class Level implements Room {
 
     private void addToSet(int x, int y){
         //adding blocked cells to set
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
+        for(int i = 0; i <= 8; i++){
+            for(int j = 0; j <= 8; j++){
                 wallsSet.add(new Vector3(8*x + i, 8*y + j, 0));
             }
         }
@@ -142,8 +142,8 @@ public class Level implements Room {
 
     public boolean blocked(Character mv, int x, int y){
         /// this function gets x,y coords on 4PX (!!!) map tile, should convert it to 32 px map
-        if(wallsSet.contains(new Vector3((float)x, (float)y, 0))){
-            System.out.println("this cell is blocked!: " + x + " " + y);
+        if(wallsSet.contains(new Vector3(x, y, 0))){
+         //   System.out.println("this cell is blocked!: " + x + " " + y);
 
             return true;
         }

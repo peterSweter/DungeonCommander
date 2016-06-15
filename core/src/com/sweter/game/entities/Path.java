@@ -14,7 +14,7 @@ public class Path implements Iterable<Tile>{
     public ArrayList <Tile> steps = new ArrayList<Tile>();
     public float finalTargetx;
     public float finalTargety;
-    private Level lvl;
+    public Level lvl;
     public int x;
 
     public Path(Level lvl){

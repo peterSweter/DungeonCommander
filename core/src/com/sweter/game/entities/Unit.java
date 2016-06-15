@@ -92,12 +92,15 @@ public abstract class Unit implements Character {
     public void pathUpdate(){
 
         if(path != null && path.x < path.getLength()-1){
+
             Tile currentTile = path.getStep(path.x);
             Tile nextTile = path.getStep(path.x+1);
             target.set(new Vector3((nextTile.getX() * 4), (nextTile.getY() * 4), 0));
 
-            if(target == null || target == getPosition()){
-                System.out.println("next coords: " + (nextTile.getX()*4) + " " + (nextTile.getY()*4) + " x: " + path.x);
+            if(target == null || !isTargeted){
+                System.out.println("next coords: " + (nextTile.getX()*4) + " " + (nextTile.getY()*4) + " x: " + path.x +
+                " " + path.lvl.blocked(this, nextTile.getX(), nextTile.getY()));
+                isTargeted = true;
                 path.x++;
             }
         }
