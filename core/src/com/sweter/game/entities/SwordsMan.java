@@ -15,10 +15,10 @@ public class SwordsMan extends Unit {
     @Override
     public void setStats() {
         this.speed = 60;
-        this.health = 100;
-        this.attack_speed = 15; // per minute
+        this.health = 200;
+        this.attack_speed = 50; // per minute
         this.width = 16;
-        this.attack_damage = 5;
+        this.attack_damage = 7;
         this.attack_range = new Rectangle(0,0,width*2.5f, width*2.5f);
         this.type_tag = "swordsman";
     }

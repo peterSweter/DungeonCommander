@@ -20,9 +20,9 @@ public class Enemy extends Unit {
     public void setStats() {
         this.unitType = UnitTypes.ENEMY;
         this.type_tag = "enemy";
-        this.health =50;
-        this.attack_damage =4;
-        this.speed =40;
+        this.health =60;
+        this.attack_damage =9;
+        this.speed =50;
         this.attack_speed =45;
         this.attack_range = new Rectangle(0,0,width*2.5f, width*2.5f);
         this.vision_range = new Rectangle(0,0, 32 *8, 32*8);

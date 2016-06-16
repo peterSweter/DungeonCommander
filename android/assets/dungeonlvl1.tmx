@@ -61,5 +61,12 @@
   <object name="enemy" x="2728" y="183" width="32" height="32"/>
   <object name="enemy" x="2734" y="250" width="32" height="32"/>
   <object name="enemy" x="2732" y="325" width="32" height="32"/>
+  <object name="enemy" x="2728" y="100" width="32" height="32"/>
+  <object name="enemy" x="2739" y="397" width="32" height="32"/>
+  <object name="enemy" x="2724" y="47" width="32" height="32"/>
+  <object name="enemy" x="2785" y="69" width="32" height="32"/>
+  <object name="enemy" x="2676" y="72" width="32" height="32"/>
+  <object name="enemy" x="2679" y="147" width="32" height="32"/>
+  <object name="enemy" x="1494" y="244" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -14,10 +14,10 @@ public class AxeMan extends Unit {
 
     @Override
     public void setStats() {
-        this.speed = 40;
-        this.health = 160;
-        this.attack_speed = 15; // per minute
-        this.attack_damage = 8;
+        this.speed = 50;
+        this.health = 220;
+        this.attack_speed = 30; // per minute
+        this.attack_damage = 10;
         this.width = 16;
         this.attack_range = new Rectangle(0,0,width*2.5f, width*2.5f);
         this.type_tag = "axeman";
