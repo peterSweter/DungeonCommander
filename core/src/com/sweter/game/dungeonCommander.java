@@ -17,6 +17,8 @@ public class dungeonCommander extends Game {
 	public static final  float GAME_WIDTH = 870;
 	public static final float  GAME_HEIGHT = 540;
 
+	public static final boolean dbg=false;
+
 	public SpriteBatch batch;
 	public BitmapFont font;
 

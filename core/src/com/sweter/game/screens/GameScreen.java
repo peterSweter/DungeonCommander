@@ -67,8 +67,18 @@ public class GameScreen implements Screen {
     public void update(float delta){
 
         inputManager.update();
-        unitManager.update(delta);
-        collisionManager.update();
+        switch (unitManager.update(delta)){
+            case 0:
+                break;
+            case -1:
+                game.setScreen(new MenuScreen(game, "YOU LOOSE :/"));
+                break;
+            case 1:
+                game.setScreen(new MenuScreen(game, "YOU WON! :)"));
+                break;
+
+        }
+        collisionManager.update(delta);
 
 
     }
@@ -102,13 +112,15 @@ public class GameScreen implements Screen {
 
         // testing srenderer
 
-        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        if(game.dbg) {
+            game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 
             //drawing wall bounds from level 01
             level_01.drawBound(game.shapeRenderer);
             unitManager.testingSchapeRender(game.shapeRenderer);
 
-        game.shapeRenderer.end();
+            game.shapeRenderer.end();
+        }
 
         game.batch.begin();
         unitManager.render(game.batch, game.font);

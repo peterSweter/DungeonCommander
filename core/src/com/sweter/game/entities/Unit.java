@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sweter.game.interfaces.Character;
 
 import java.util.HashSet;
@@ -41,8 +42,9 @@ public abstract class Unit implements Character {
     float speed = 75;
     float width = 16;
     int health = 100;
-    int attack_damage = 10;
+    float attack_damage = 10;
     float attack_speed = 1; // per minute
+    long last_attack=0;
 
     Rectangle attack_range;
 
@@ -91,7 +93,7 @@ public abstract class Unit implements Character {
             }
         }
 
-        attack_range.setPosition(position.x -attack_range.width/2, position.y-attack_range.height/2);
+        attack_range.setPosition(position.x - attack_range.width / 2, position.y - attack_range.height / 2);
     }
 
     public void pathUpdate(){
@@ -123,7 +125,7 @@ public abstract class Unit implements Character {
         font.setColor(Color.LIME);
         font.draw(sb, type_tag, position.x -width*1.5f,position.y + width*2f);
         font.setColor(Color.WHITE);
-        font.draw(sb, ""+health, position.x -width*0.8f,position.y +width*0.5f);
+        font.draw(sb, "" + health, position.x - width * 0.8f, position.y + width * 0.5f);
 
     }
 
@@ -158,7 +160,7 @@ public abstract class Unit implements Character {
     public void  wallColision(Rectangle wall){
 
         position.x = wall.getX() +wall.getWidth();
-        System.out.println("collision");
+
 
     }
 
@@ -188,6 +190,25 @@ public abstract class Unit implements Character {
     }
     public Vector3 dynamicTargetPosition(){
         return dynamicTarget.getPosition();
+    }
+
+    public void takeDemage(float dmg){
+        this.health-=dmg;
+    }
+
+    public float attack(){
+
+        if((TimeUtils.millis() - last_attack) > 60000/attack_speed ) {
+
+            last_attack = TimeUtils.millis();
+            return attack_damage;
+        }
+        return 0;
+    }
+
+    public boolean isAlive(){
+
+        return (health>0);
     }
 
 

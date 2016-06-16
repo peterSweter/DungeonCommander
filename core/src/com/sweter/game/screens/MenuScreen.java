@@ -4,11 +4,16 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sweter.game.dungeonCommander;
 
 /**
@@ -21,8 +26,21 @@ public class MenuScreen implements Screen {
     private int tw;
     private int th;
     private boolean callGame = false;
+    public String info="";
+
+    public OrthographicCamera camera;
+    Viewport viewport;
+
     public MenuScreen(dungeonCommander game){
         this.game = game;
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(game.GAME_WIDTH, game.GAME_HEIGHT, camera);
+        camera.setToOrtho(false, game.GAME_WIDTH,game.GAME_HEIGHT);
+    }
+    public MenuScreen(dungeonCommander game, String info){
+        this(game);
+        this.info = info;
+
     }
     public void update(){
         Gdx.input.setInputProcessor(new InputAdapter() {
@@ -52,15 +70,28 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(255/255f, 255/255f, 255/255f, 1);
+        game.batch.setProjectionMatrix(camera.combined);
+        camera.update();
+
         game.batch.begin();
-        game.batch.draw(menuScreen,  game.GAME_WIDTH/2 - tw, game.GAME_HEIGHT/2 - th);
+        game.batch.draw(menuScreen, game.GAME_WIDTH / 2 - tw, game.GAME_HEIGHT / 2 - th);
         update();
         if(callGame)
             game.setScreen(new GameScreen(game));
-        //mysprite.setOriginCenter();
-        //mysprite.draw();
+        game.font.setColor(Color.BLACK);
+        game.font.getData().setScale(2f);
+        game.font.draw(game.batch, "Instructions: \n Use 'q', 'w', 'e' keys to switch between units, and kill all enemies! ", 20, 100);
+            game.font.getData().setScale(5f);
+         game.font.setColor(Color.LIME);
+            game.font.draw(game.batch, ""+info, 250, 500);
+        game.font.getData().setScale(1f);
+
+
+
+
         game.batch.end();
     }
 

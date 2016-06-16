@@ -13,6 +13,8 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.sweter.game.entities.AstarPathFinder;
 import com.sweter.game.entities.AxeMan;
 import com.sweter.game.entities.Enemy;
 import com.sweter.game.entities.Level;
@@ -21,6 +23,7 @@ import com.sweter.game.entities.Path;
 import com.sweter.game.entities.SwordsMan;
 import com.sweter.game.entities.Unit;
 import com.sweter.game.entities.UnitTypes;
+import com.sweter.game.interfaces.*;
 
 
 import java.util.ArrayList;
@@ -38,7 +41,8 @@ public class UnitManager {
 
     ArrayList<Unit> units;
     ArrayList<Unit> alies;
-    ArrayList<Unit> enemies;
+    ArrayList<Enemy> enemies;
+
 
     public Unit mainCharacter, axeMan, swordsMan;
     public Path mainCharacterPath;
@@ -49,11 +53,13 @@ public class UnitManager {
 
     public  UnitManager(Level level){
 
+
+
         this.level = level;
 
         units = new ArrayList<Unit>();
         alies = new ArrayList<Unit>();
-        enemies = new ArrayList<Unit>();
+        enemies = new ArrayList<Enemy>();
 
 
         mainCharacter = new MainCharacter(320,200);
@@ -86,12 +92,20 @@ public class UnitManager {
 
     }
 
-    public void update(float delta){
+    public int update(float delta){
 
         for(Unit u : units){
             u.update(delta);
         }
+        if(alies.isEmpty()){
+            return -1;
+        }
 
+        if(enemies.isEmpty()){
+            return 1;
+        }
+
+        return 0;
     }
 
     public void schapeRender(ShapeRenderer sr){
@@ -115,6 +129,7 @@ public class UnitManager {
     }
 
     public void setActiveUnit(Unit  unit){
+        if(!unit.isAlive())return;
         this.activeUnit = unit;
     }
 
@@ -123,7 +138,7 @@ public class UnitManager {
         for(MapObject object : objects) {
             if (object instanceof RectangleMapObject) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
-                System.out.println("TEEEEEEEEST:"+object.getName());
+               // System.out.println("TEEEEEEEEST:"+object.getName());
                 // System.out.println( "walls: "  + ((RectangleMapObject) object).getRectangle().getX() + " " +  ((RectangleMapObject) object).getRectangle().getY());
 
                 switch(object.getName().charAt(0)){

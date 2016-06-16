@@ -33,7 +33,7 @@ public class AstarPathFinder implements PathFinder {
         this.maxSearchDistance = maxSearchDistance;
 
         nodes = new Node[8*map.getWidthInTiles()][8*map.getHeightInTiles()];
-        System.out.println("nodes size is: " + 8*map.getHeightInTiles() + " " + 4*map.getWidthInTiles());
+        System.out.println("nodes size is: " + 8*map.getHeightInTiles() + " " + 8*map.getWidthInTiles());
         System.out.println("map size is: " + map.getHeightInTiles() + " " + map.getWidthInTiles());
 
 
@@ -75,6 +75,7 @@ public class AstarPathFinder implements PathFinder {
         /// init
         nodes[sx][sy].cost = 0;
         nodes[sx][sy].depth = 0;
+
         closed.clear();
         open.clear();
         open.add(nodes[sx][sy]);

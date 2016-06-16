@@ -32,7 +32,7 @@ public class InputManager {
         this.unitManager = unitManager;
         this.camera = camera;
         this.level = level;
-        pf = new AstarPathFinder(level, 200);
+        pf = new AstarPathFinder(level,200);
     }
 
     public void update(){
@@ -80,7 +80,7 @@ public class InputManager {
                     testPath.finalTargety = touch_point.y;
                 }
 
-                //unitManager.getActiveCharacter().setPath(testPath);
+                unitManager.getActiveCharacter().setPath(testPath);
                 return true;
             }
 
@@ -112,6 +112,7 @@ public class InputManager {
             @Override public boolean keyDown (int keycode) {
                 switch (keycode){
                     case Input.Keys.Q:
+
                         unitManager.setActiveUnit(unitManager.mainCharacter);
                         break;
                     case Input.Keys.W:
